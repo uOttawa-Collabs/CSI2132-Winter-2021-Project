@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Main
 {
-    private final static String            configFilePath = "config.json";
+    private final static String configFilePath = "config.json";
 
     public static void main(String[] args)
     {

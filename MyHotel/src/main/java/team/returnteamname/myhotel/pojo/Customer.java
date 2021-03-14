@@ -12,7 +12,8 @@ public class Customer
     private final String address;
     private final Date   dateOfRegistration;
 
-    public Customer(int id, @NotNull String fullName, @NotNull String sinNumber, @NotNull String address, @NotNull Date dateOfRegistration)
+    public Customer(int id, @NotNull String fullName, @NotNull String sinNumber, @NotNull String address,
+                    @NotNull Date dateOfRegistration)
     {
         this.id                 = id;
         this.fullName           = fullName;

@@ -1,6 +1,5 @@
 package team.returnteamname.myhotel.connection;
 
-import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotel.config.Config;
 import team.returnteamname.myhotel.config.ConfigManager;
 

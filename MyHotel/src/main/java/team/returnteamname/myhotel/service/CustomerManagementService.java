@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotel.connection.ConnectionFactory;
 import team.returnteamname.myhotel.pojo.Customer;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
