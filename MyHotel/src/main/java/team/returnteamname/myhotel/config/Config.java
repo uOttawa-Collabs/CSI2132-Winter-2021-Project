@@ -2,6 +2,7 @@ package team.returnteamname.myhotel.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
@@ -15,8 +16,9 @@ public class Config implements Serializable
     private final String username;
     private final String password;
 
-    public Config(String dbms, String driver, String serverAddress, String database, String username,
-                  String password)
+    public Config(@NotNull String dbms, @NotNull String driver, @NotNull String serverAddress, @NotNull String database,
+                  @NotNull String username,
+                  @NotNull String password)
     {
         this.dbms          = dbms;
         this.driver        = driver;

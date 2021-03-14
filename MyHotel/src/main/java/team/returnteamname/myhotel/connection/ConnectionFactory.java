@@ -2,6 +2,7 @@ package team.returnteamname.myhotel.connection;
 
 import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotel.config.Config;
+import team.returnteamname.myhotel.config.ConfigManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,15 +25,13 @@ public class ConnectionFactory
         return connectionFactory;
     }
 
-    public Connection getConnection(
-        @NotNull
-            Config config)
+    public Connection getConnection()
     {
         if (connection != null)
         {
             try
             {
-                if (connection.isValid(3) && this.config == config)
+                if (connection.isValid(3) && this.config == ConfigManager.getInstance().getConfig())
                 {
                     return connection;
                 }
@@ -50,6 +49,8 @@ public class ConnectionFactory
         // Invalid, expired, or null connection, creating a new one
         try
         {
+            config = ConfigManager.getInstance().getConfig();
+
             Class.forName(config.getDriver());
             String url = "jdbc:" + config.getDbms() + "://" + config.getServerAddress() + "/" + config.getDatabase();
             connection = DriverManager.getConnection(url, config.getUsername(), config.getPassword());

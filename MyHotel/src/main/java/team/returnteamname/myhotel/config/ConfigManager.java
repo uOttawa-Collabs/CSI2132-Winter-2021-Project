@@ -27,9 +27,7 @@ public class ConfigManager
         return configManager;
     }
 
-    public void load(
-        @NotNull
-            String configString)
+    public void load(@NotNull String configString)
     {
         config         = gson.fromJson(configString, Config.class);
         isConfigLoaded = true;
