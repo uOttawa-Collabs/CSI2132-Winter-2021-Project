@@ -3,8 +3,13 @@ package team.returnteamname.myhotel;
 import team.returnteamname.myhotel.config.ConfigManager;
 import team.returnteamname.myhotel.config.source.FileConfigSource;
 import team.returnteamname.myhotel.config.source.IConfigSource;
+import team.returnteamname.myhotel.dao.BaseDao;
+import team.returnteamname.myhotel.pojo.Customer;
+import team.returnteamname.myhotel.pojo.Employee;
+import team.returnteamname.myhotel.pojo.HotelBrand;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 public class Main
 {

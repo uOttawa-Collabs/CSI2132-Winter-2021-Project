@@ -2,6 +2,7 @@ package team.returnteamname.myhotel.dao;
 
 import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotel.connection.ConnectionFactory;
+import team.returnteamname.myhotel.pojo.AbstractPojo;
 import team.returnteamname.myhotel.util.Pair;
 import team.returnteamname.myhotel.util.Util;
 
@@ -84,6 +85,9 @@ public class BaseDao
                     valuePlaceholderBuilder.append("?");
                 }
             }
+
+            if (attributeOrderMap.size() == 0)
+                return 0;
 
             sql = sql
                 .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
