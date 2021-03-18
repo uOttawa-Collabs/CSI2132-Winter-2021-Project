@@ -1,8 +1,10 @@
 package team.returnteamname.myhotel.pojo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.sql.Date;
 
-public class Book
+public class Book extends AbstractPojo
 {
     private Integer customerId;
     private String  hotelBrandName;
@@ -15,8 +17,9 @@ public class Book
     public Book()
     {}
 
-    public Book(Integer customerId, String hotelBrandName, String hotelName, Integer roomId, Date date,
-                String roomType, Integer totalNumberOccupants)
+    public Book(@Nullable Integer customerId, @Nullable String hotelBrandName, @Nullable String hotelName,
+                @Nullable Integer roomId, @Nullable Date date,
+                @Nullable String roomType, @Nullable Integer totalNumberOccupants)
     {
         this.customerId           = customerId;
         this.hotelBrandName       = hotelBrandName;
@@ -27,72 +30,79 @@ public class Book
         this.totalNumberOccupants = totalNumberOccupants;
     }
 
+    @Nullable
     public Integer getCustomerId()
     {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId)
+    public void setCustomerId(@Nullable Integer customerId)
     {
         this.customerId = customerId;
     }
 
+    @Nullable
     public String getHotelBrandName()
     {
         return hotelBrandName;
     }
 
-    public void setHotelBrandName(String hotelBrandName)
+    public void setHotelBrandName(@Nullable String hotelBrandName)
     {
         this.hotelBrandName = hotelBrandName;
     }
 
+    @Nullable
     public String getHotelName()
     {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName)
+    public void setHotelName(@Nullable String hotelName)
     {
         this.hotelName = hotelName;
     }
 
+    @Nullable
     public Integer getRoomId()
     {
         return roomId;
     }
 
-    public void setRoomId(Integer roomId)
+    public void setRoomId(@Nullable Integer roomId)
     {
         this.roomId = roomId;
     }
 
+    @Nullable
     public Date getDate()
     {
         return date;
     }
 
-    public void setDate(Date date)
+    public void setDate(@Nullable Date date)
     {
         this.date = date;
     }
 
+    @Nullable
     public String getRoomType()
     {
         return roomType;
     }
 
-    public void setRoomType(String roomType)
+    public void setRoomType(@Nullable String roomType)
     {
         this.roomType = roomType;
     }
 
+    @Nullable
     public Integer getTotalNumberOccupants()
     {
         return totalNumberOccupants;
     }
 
-    public void setTotalNumberOccupants(Integer totalNumberOccupants)
+    public void setTotalNumberOccupants(@Nullable Integer totalNumberOccupants)
     {
         this.totalNumberOccupants = totalNumberOccupants;
     }

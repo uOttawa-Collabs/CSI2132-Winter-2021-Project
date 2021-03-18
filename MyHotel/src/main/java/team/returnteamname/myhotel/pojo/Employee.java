@@ -1,5 +1,7 @@
 package team.returnteamname.myhotel.pojo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.math.BigDecimal;
 
 public class Employee extends AbstractPojo
@@ -14,7 +16,8 @@ public class Employee extends AbstractPojo
     public Employee()
     {}
 
-    public Employee(Integer id, String fullName, String sinNumber, String address, BigDecimal salary, String role)
+    public Employee(@Nullable Integer id, @Nullable String fullName, @Nullable String sinNumber,
+                    @Nullable String address, @Nullable BigDecimal salary, @Nullable String role)
     {
         this.id        = id;
         this.fullName  = fullName;
@@ -24,62 +27,68 @@ public class Employee extends AbstractPojo
         this.role      = role;
     }
 
+    @Nullable
     public Integer getId()
     {
         return id;
     }
 
-    public void setId(Integer id)
+    public void setId(@Nullable Integer id)
     {
         this.id = id;
     }
 
+    @Nullable
     public String getFullName()
     {
         return fullName;
     }
 
-    public void setFullName(String fullName)
+    public void setFullName(@Nullable String fullName)
     {
         this.fullName = fullName;
     }
 
+    @Nullable
     public String getSinNumber()
     {
         return sinNumber;
     }
 
-    public void setSinNumber(String sinNumber)
+    public void setSinNumber(@Nullable String sinNumber)
     {
         this.sinNumber = sinNumber;
     }
 
+    @Nullable
     public String getAddress()
     {
         return address;
     }
 
-    public void setAddress(String address)
+    public void setAddress(@Nullable String address)
     {
         this.address = address;
     }
 
+    @Nullable
     public BigDecimal getSalary()
     {
         return salary;
     }
 
-    public void setSalary(BigDecimal salary)
+    public void setSalary(@Nullable BigDecimal salary)
     {
         this.salary = salary;
     }
 
+    @Nullable
     public String getRole()
     {
         return role;
     }
 
-    public void setRole(String role)
+    public void setRole(@Nullable String role)
     {
         this.role = role;
     }

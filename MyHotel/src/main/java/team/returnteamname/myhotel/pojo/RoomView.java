@@ -1,6 +1,8 @@
 package team.returnteamname.myhotel.pojo;
 
-public class RoomView
+import org.jetbrains.annotations.Nullable;
+
+public class RoomView extends AbstractPojo
 {
     private String  hotelBrandName;
     private String  hotelName;
@@ -10,7 +12,8 @@ public class RoomView
     public RoomView()
     {}
 
-    public RoomView(String hotelBrandName, String hotelName, Integer roomId, String view)
+    public RoomView(@Nullable String hotelBrandName, @Nullable String hotelName, @Nullable Integer roomId,
+                    @Nullable String view)
     {
         this.hotelBrandName = hotelBrandName;
         this.hotelName      = hotelName;
@@ -18,42 +21,46 @@ public class RoomView
         this.view           = view;
     }
 
+    @Nullable
     public String getHotelBrandName()
     {
         return hotelBrandName;
     }
 
-    public void setHotelBrandName(String hotelBrandName)
+    public void setHotelBrandName(@Nullable String hotelBrandName)
     {
         this.hotelBrandName = hotelBrandName;
     }
 
+    @Nullable
     public String getHotelName()
     {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName)
+    public void setHotelName(@Nullable String hotelName)
     {
         this.hotelName = hotelName;
     }
 
+    @Nullable
     public Integer getRoomId()
     {
         return roomId;
     }
 
-    public void setRoomId(Integer roomId)
+    public void setRoomId(@Nullable Integer roomId)
     {
         this.roomId = roomId;
     }
 
+    @Nullable
     public String getView()
     {
         return view;
     }
 
-    public void setView(String view)
+    public void setView(@Nullable String view)
     {
         this.view = view;
     }

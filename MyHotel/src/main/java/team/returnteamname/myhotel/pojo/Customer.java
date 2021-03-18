@@ -14,13 +14,11 @@ public class Customer extends AbstractPojo
 
     public Customer()
     {
-        super();
     }
 
     public Customer(@Nullable Integer id, @Nullable String fullName, @Nullable String sinNumber,
                     @Nullable String address, @Nullable Date dateOfRegistration)
     {
-        super();
         this.id                 = id;
         this.fullName           = fullName;
         this.sinNumber          = sinNumber;
@@ -28,6 +26,7 @@ public class Customer extends AbstractPojo
         this.dateOfRegistration = dateOfRegistration;
     }
 
+    @Nullable
     public Integer getId()
     {
         return id;
@@ -38,6 +37,7 @@ public class Customer extends AbstractPojo
         this.id = id;
     }
 
+    @Nullable
     public String getFullName()
     {
         return fullName;
@@ -48,6 +48,7 @@ public class Customer extends AbstractPojo
         this.fullName = fullName;
     }
 
+    @Nullable
     public String getSinNumber()
     {
         return sinNumber;
@@ -58,6 +59,7 @@ public class Customer extends AbstractPojo
         this.sinNumber = sinNumber;
     }
 
+    @Nullable
     public String getAddress()
     {
         return address;
@@ -68,6 +70,7 @@ public class Customer extends AbstractPojo
         this.address = address;
     }
 
+    @Nullable
     public Date getDateOfRegistration()
     {
         return dateOfRegistration;

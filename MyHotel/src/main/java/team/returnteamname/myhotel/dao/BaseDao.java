@@ -2,6 +2,7 @@ package team.returnteamname.myhotel.dao;
 
 import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotel.connection.ConnectionFactory;
+import team.returnteamname.myhotel.pojo.AbstractPojo;
 import team.returnteamname.myhotel.util.Pair;
 import team.returnteamname.myhotel.util.Util;
 
@@ -31,10 +32,10 @@ public class BaseDao
         return preparedStatement.executeQuery();
     }
 
-    private static Map<String, Object> getAttributeMap(Object object)
+    private static Map<String, Object> getAttributeMap(AbstractPojo pojo)
         throws InvocationTargetException, IllegalAccessException
     {
-        Class<?> clazz   = object.getClass();
+        Class<?> clazz   = pojo.getClass();
         Method[] methods = clazz.getMethods();
 
         Map<String, Object> attributeMap = new HashMap<>();
@@ -46,7 +47,7 @@ public class BaseDao
             if (methodName.startsWith("get") && !methodName.startsWith("getClass"))
             {
                 String fieldName   = methodName.substring(3);
-                Object returnValue = method.invoke(object, (Object[]) null);
+                Object returnValue = method.invoke(pojo, (Object[]) null);
 
                 attributeMap
                     .put(Util.camelCaseToUnderscoreLowerCase(fieldName), returnValue);
@@ -56,18 +57,18 @@ public class BaseDao
         return attributeMap;
     }
 
-    public int doInsert(@NotNull Object object) throws SQLException
+    public int doInsert(@NotNull AbstractPojo pojo) throws SQLException
     {
         try
         {
             String sql = "INSERT INTO <tableName>(<attributeList>) VALUES (<valuePlaceholderList>);";
 
-            Class<?> clazz     = object.getClass();
+            Class<?> clazz     = pojo.getClass();
             String   className = clazz.getSimpleName();
 
             StringBuilder        attributeNameBuilder    = new StringBuilder();
             StringBuilder        valuePlaceholderBuilder = new StringBuilder();
-            Map<String, Object>  attributeMap            = getAttributeMap(object);
+            Map<String, Object>  attributeMap            = getAttributeMap(pojo);
             Map<String, Integer> attributeOrderMap       = new HashMap<>();
             int                  i                       = 1;
             for (String attributeName : attributeMap.keySet())
@@ -110,7 +111,7 @@ public class BaseDao
         }
     }
 
-    public int doDelete(@NotNull Object matcher) throws SQLException
+    public int doDelete(@NotNull AbstractPojo matcher) throws SQLException
     {
         try
         {
@@ -157,7 +158,7 @@ public class BaseDao
         }
     }
 
-    public Pair<Object[], ResultSet> doSelect(@NotNull Object matcher) throws SQLException
+    public Pair<ArrayList<AbstractPojo>, ResultSet> doSelect(@NotNull AbstractPojo matcher) throws SQLException
     {
         try
         {
@@ -196,12 +197,12 @@ public class BaseDao
                     statement.setObject(attributeOrderMap.get(attributeName), o);
             }
 
-            ResultSet         resultSet = statement.executeQuery();
-            ArrayList<Object> arrayList = new ArrayList<>();
+            ResultSet               resultSet = statement.executeQuery();
+            ArrayList<AbstractPojo> arrayList = new ArrayList<>();
 
             while (resultSet.next())
             {
-                Object o = clazz.getDeclaredConstructor().newInstance();
+                AbstractPojo o = (AbstractPojo) clazz.getDeclaredConstructor().newInstance();
                 for (String attributeName : attributeMap.keySet())
                 {
                     Field field = clazz.getDeclaredField(Util.underscoreLowerCaseToCamelCase(attributeName));
@@ -212,7 +213,7 @@ public class BaseDao
                 arrayList.add(o);
             }
 
-            return new Pair<>(arrayList.toArray(), resultSet);
+            return new Pair<>(arrayList, resultSet);
         }
         catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException | NoSuchFieldException e)
         {
@@ -220,7 +221,7 @@ public class BaseDao
         }
     }
 
-    public int doUpdate(@NotNull Object matcher, @NotNull Object carrier) throws SQLException
+    public int doUpdate(@NotNull AbstractPojo matcher, @NotNull AbstractPojo carrier) throws SQLException
     {
         try
         {

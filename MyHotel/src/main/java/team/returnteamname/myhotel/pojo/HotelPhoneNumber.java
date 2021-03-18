@@ -1,6 +1,8 @@
 package team.returnteamname.myhotel.pojo;
 
-public class HotelPhoneNumber
+import org.jetbrains.annotations.Nullable;
+
+public class HotelPhoneNumber extends AbstractPojo
 {
     private String hotelBrandName;
     private String hotelName;
@@ -9,39 +11,42 @@ public class HotelPhoneNumber
     public HotelPhoneNumber()
     {}
 
-    public HotelPhoneNumber(String hotelBrandName, String hotelName, String phoneNumber)
+    public HotelPhoneNumber(@Nullable String hotelBrandName, @Nullable String hotelName, @Nullable String phoneNumber)
     {
         this.hotelBrandName = hotelBrandName;
         this.hotelName      = hotelName;
         this.phoneNumber    = phoneNumber;
     }
 
+    @Nullable
     public String getHotelBrandName()
     {
         return hotelBrandName;
     }
 
-    public void setHotelBrandName(String hotelBrandName)
+    public void setHotelBrandName(@Nullable String hotelBrandName)
     {
         this.hotelBrandName = hotelBrandName;
     }
 
+    @Nullable
     public String getHotelName()
     {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName)
+    public void setHotelName(@Nullable String hotelName)
     {
         this.hotelName = hotelName;
     }
 
+    @Nullable
     public String getPhoneNumber()
     {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber)
+    public void setPhoneNumber(@Nullable String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
     }

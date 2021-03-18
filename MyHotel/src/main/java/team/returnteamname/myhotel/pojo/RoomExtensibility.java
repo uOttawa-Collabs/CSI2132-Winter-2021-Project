@@ -1,6 +1,8 @@
 package team.returnteamname.myhotel.pojo;
 
-public class RoomExtensibility
+import org.jetbrains.annotations.Nullable;
+
+public class RoomExtensibility extends AbstractPojo
 {
     private String  hotelBrandName;
     private String  hotelName;
@@ -10,7 +12,8 @@ public class RoomExtensibility
     public RoomExtensibility()
     {}
 
-    public RoomExtensibility(String hotelBrandName, String hotelName, Integer roomId, String extensibility)
+    public RoomExtensibility(@Nullable String hotelBrandName, @Nullable String hotelName, @Nullable Integer roomId,
+                             @Nullable String extensibility)
     {
         this.hotelBrandName = hotelBrandName;
         this.hotelName      = hotelName;
@@ -18,42 +21,46 @@ public class RoomExtensibility
         this.extensibility  = extensibility;
     }
 
+    @Nullable
     public String getHotelBrandName()
     {
         return hotelBrandName;
     }
 
-    public void setHotelBrandName(String hotelBrandName)
+    public void setHotelBrandName(@Nullable String hotelBrandName)
     {
         this.hotelBrandName = hotelBrandName;
     }
 
+    @Nullable
     public String getHotelName()
     {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName)
+    public void setHotelName(@Nullable String hotelName)
     {
         this.hotelName = hotelName;
     }
 
+    @Nullable
     public Integer getRoomId()
     {
         return roomId;
     }
 
-    public void setRoomId(Integer roomId)
+    public void setRoomId(@Nullable Integer roomId)
     {
         this.roomId = roomId;
     }
 
+    @Nullable
     public String getExtensibility()
     {
         return extensibility;
     }
 
-    public void setExtensibility(String extensibility)
+    public void setExtensibility(@Nullable String extensibility)
     {
         this.extensibility = extensibility;
     }

@@ -1,6 +1,8 @@
 package team.returnteamname.myhotel.pojo;
 
-public class HotelBrand
+import org.jetbrains.annotations.Nullable;
+
+public class HotelBrand extends AbstractPojo
 {
     private String hotelBrandName;
     private String mainOfficeLocation;
@@ -10,8 +12,8 @@ public class HotelBrand
     public HotelBrand()
     {}
 
-    public HotelBrand(String hotelBrandName, String mainOfficeLocation, String physicalAddress,
-                      String totalPhoneNumber)
+    public HotelBrand(@Nullable String hotelBrandName, @Nullable String mainOfficeLocation,
+                      @Nullable String physicalAddress, @Nullable String totalPhoneNumber)
     {
         this.hotelBrandName     = hotelBrandName;
         this.mainOfficeLocation = mainOfficeLocation;
@@ -19,42 +21,46 @@ public class HotelBrand
         this.totalPhoneNumber   = totalPhoneNumber;
     }
 
+    @Nullable
     public String getHotelBrandName()
     {
         return hotelBrandName;
     }
 
-    public void setHotelBrandName(String hotelBrandName)
+    public void setHotelBrandName(@Nullable String hotelBrandName)
     {
         this.hotelBrandName = hotelBrandName;
     }
 
+    @Nullable
     public String getMainOfficeLocation()
     {
         return mainOfficeLocation;
     }
 
-    public void setMainOfficeLocation(String mainOfficeLocation)
+    public void setMainOfficeLocation(@Nullable String mainOfficeLocation)
     {
         this.mainOfficeLocation = mainOfficeLocation;
     }
 
+    @Nullable
     public String getPhysicalAddress()
     {
         return physicalAddress;
     }
 
-    public void setPhysicalAddress(String physicalAddress)
+    public void setPhysicalAddress(@Nullable String physicalAddress)
     {
         this.physicalAddress = physicalAddress;
     }
 
+    @Nullable
     public String getTotalPhoneNumber()
     {
         return totalPhoneNumber;
     }
 
-    public void setTotalPhoneNumber(String totalPhoneNumber)
+    public void setTotalPhoneNumber(@Nullable String totalPhoneNumber)
     {
         this.totalPhoneNumber = totalPhoneNumber;
     }

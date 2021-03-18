@@ -1,8 +1,10 @@
 package team.returnteamname.myhotel.pojo;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.math.BigDecimal;
 
-public class Room
+public class Room extends AbstractPojo
 {
     private String     hotelBrandName;
     private String     hotelName;
@@ -10,7 +12,8 @@ public class Room
     private BigDecimal price;
     private String     roomCapacity;
 
-    public Room(String hotelBrandName, String hotelName, Integer roomId, BigDecimal price, String roomCapacity)
+    public Room(@Nullable String hotelBrandName, @Nullable String hotelName, @Nullable Integer roomId,
+                @Nullable BigDecimal price, @Nullable String roomCapacity)
     {
         this.hotelBrandName = hotelBrandName;
         this.hotelName      = hotelName;
@@ -19,52 +22,57 @@ public class Room
         this.roomCapacity   = roomCapacity;
     }
 
+    @Nullable
     public String getHotelBrandName()
     {
         return hotelBrandName;
     }
 
-    public void setHotelBrandName(String hotelBrandName)
+    public void setHotelBrandName(@Nullable String hotelBrandName)
     {
         this.hotelBrandName = hotelBrandName;
     }
 
+    @Nullable
     public String getHotelName()
     {
         return hotelName;
     }
 
-    public void setHotelName(String hotelName)
+    public void setHotelName(@Nullable String hotelName)
     {
         this.hotelName = hotelName;
     }
 
+    @Nullable
     public Integer getRoomId()
     {
         return roomId;
     }
 
-    public void setRoomId(Integer roomId)
+    public void setRoomId(@Nullable Integer roomId)
     {
         this.roomId = roomId;
     }
 
+    @Nullable
     public BigDecimal getPrice()
     {
         return price;
     }
 
-    public void setPrice(BigDecimal price)
+    public void setPrice(@Nullable BigDecimal price)
     {
         this.price = price;
     }
 
+    @Nullable
     public String getRoomCapacity()
     {
         return roomCapacity;
     }
 
-    public void setRoomCapacity(String roomCapacity)
+    public void setRoomCapacity(@Nullable String roomCapacity)
     {
         this.roomCapacity = roomCapacity;
     }
