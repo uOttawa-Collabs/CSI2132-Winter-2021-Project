@@ -2,10 +2,10 @@ package team.returnteamname.myhotel.pojo;
 
 public class RoomAmenity
 {
-    private String hotelBrandName;
-    private String hotelName;
+    private String  hotelBrandName;
+    private String  hotelName;
     private Integer roomId;
-    private String amenity;
+    private String  amenity;
 
     public RoomAmenity()
     {}

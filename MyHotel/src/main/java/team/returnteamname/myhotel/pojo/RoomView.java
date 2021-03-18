@@ -2,10 +2,10 @@ package team.returnteamname.myhotel.pojo;
 
 public class RoomView
 {
-    private String hotelBrandName;
-    private String hotelName;
+    private String  hotelBrandName;
+    private String  hotelName;
     private Integer roomId;
-    private String view;
+    private String  view;
 
     public RoomView()
     {}

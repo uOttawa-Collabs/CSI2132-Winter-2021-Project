@@ -2,7 +2,6 @@ package team.returnteamname.myhotel.dao;
 
 import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotel.connection.ConnectionFactory;
-import team.returnteamname.myhotel.pojo.AbstractPojo;
 import team.returnteamname.myhotel.util.Pair;
 import team.returnteamname.myhotel.util.Util;
 

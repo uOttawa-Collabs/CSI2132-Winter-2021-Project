@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Room
 {
-    private String hotelBrandName;
+    private String     hotelBrandName;
     private String     hotelName;
     private Integer    roomId;
     private BigDecimal price;

@@ -7,13 +7,13 @@ import java.sql.Date;
 
 public class Rent
 {
-    private Integer customerId;
-    private String  hotelBrandName;
-    private String  hotelName;
-    private Integer roomId;
-    private Date    date;
-    private String  roomType;
-    private Integer totalNumberOccupants;
+    private Integer    customerId;
+    private String     hotelBrandName;
+    private String     hotelName;
+    private Integer    roomId;
+    private Date       date;
+    private String     roomType;
+    private Integer    totalNumberOccupants;
     private BigDecimal billAmount;
     private PGInterval duration;
 
