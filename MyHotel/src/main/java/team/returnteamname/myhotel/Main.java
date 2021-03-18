@@ -15,6 +15,7 @@ public class Main
         try
         {
             initialize();
+
         }
         catch (Exception e)
         {

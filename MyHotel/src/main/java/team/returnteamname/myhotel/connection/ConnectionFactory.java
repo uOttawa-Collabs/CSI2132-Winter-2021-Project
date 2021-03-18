@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class ConnectionFactory
 {
-    private static ConnectionFactory connectionFactory;
+    private static ConnectionFactory instance;
     private        Config            config;
     private        Connection        connection;
 
@@ -17,11 +17,11 @@ public class ConnectionFactory
 
     public static ConnectionFactory getInstance()
     {
-        if (connectionFactory == null)
+        if (instance == null)
         {
-            connectionFactory = new ConnectionFactory();
+            instance = new ConnectionFactory();
         }
-        return connectionFactory;
+        return instance;
     }
 
     public Connection getConnection()

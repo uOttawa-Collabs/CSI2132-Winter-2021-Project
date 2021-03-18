@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ConfigManager
 {
-    private static ConfigManager configManager;
+    private static ConfigManager instance;
 
     private final Gson gson;
 
@@ -20,11 +20,11 @@ public class ConfigManager
 
     public static ConfigManager getInstance()
     {
-        if (configManager == null)
+        if (instance == null)
         {
-            configManager = new ConfigManager();
+            instance = new ConfigManager();
         }
-        return configManager;
+        return instance;
     }
 
     public void load(@NotNull String configString)

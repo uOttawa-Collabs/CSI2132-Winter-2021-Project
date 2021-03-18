@@ -1,20 +1,26 @@
 package team.returnteamname.myhotel.pojo;
 
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.Date;
 
-public class Customer
+public class Customer extends AbstractPojo
 {
-    private final int    id;
-    private final String fullName;
-    private final String sinNumber;
-    private final String address;
-    private final Date   dateOfRegistration;
+    private Integer id;
+    private String  fullName;
+    private String  sinNumber;
+    private String  address;
+    private Date    dateOfRegistration;
 
-    public Customer(int id, @NotNull String fullName, @NotNull String sinNumber, @NotNull String address,
-                    @NotNull Date dateOfRegistration)
+    public Customer()
     {
+        super();
+    }
+
+    public Customer(@Nullable Integer id, @Nullable String fullName, @Nullable String sinNumber,
+                    @Nullable String address, @Nullable Date dateOfRegistration)
+    {
+        super();
         this.id                 = id;
         this.fullName           = fullName;
         this.sinNumber          = sinNumber;
@@ -22,9 +28,14 @@ public class Customer
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    public int getId()
+    public Integer getId()
     {
         return id;
+    }
+
+    public void setId(@Nullable Integer id)
+    {
+        this.id = id;
     }
 
     public String getFullName()
@@ -32,9 +43,19 @@ public class Customer
         return fullName;
     }
 
+    public void setFullName(@Nullable String fullName)
+    {
+        this.fullName = fullName;
+    }
+
     public String getSinNumber()
     {
         return sinNumber;
+    }
+
+    public void setSinNumber(@Nullable String sinNumber)
+    {
+        this.sinNumber = sinNumber;
     }
 
     public String getAddress()
@@ -42,8 +63,18 @@ public class Customer
         return address;
     }
 
+    public void setAddress(@Nullable String address)
+    {
+        this.address = address;
+    }
+
     public Date getDateOfRegistration()
     {
         return dateOfRegistration;
+    }
+
+    public void setDateOfRegistration(@Nullable Date dateOfRegistration)
+    {
+        this.dateOfRegistration = dateOfRegistration;
     }
 }

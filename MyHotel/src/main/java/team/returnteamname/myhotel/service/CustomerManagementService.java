@@ -10,9 +10,10 @@ import java.sql.SQLException;
 
 public class CustomerManagementService
 {
-    private static final ConnectionFactory connectionFactory  = ConnectionFactory.getInstance();
-    private static final String            registerSQL        = "INSERT INTO customer VALUES (?, ?, ?, ?, ?);";
-    private static final String            getCustomerByIDSQL = "SELECT * FROM customer WHERE id = ?;";
+    private static final ConnectionFactory connectionFactory     = ConnectionFactory.getInstance();
+    private static final String            registerSQL           = "INSERT INTO customer VALUES (?, ?, ?, ?, ?);";
+    private static final String            getCustomerByIDSQL    = "SELECT * FROM customer WHERE id = ?;";
+    private static final String            deleteCustomerByIDSQL = "DELETE FROM customer WHERE id = ?;";
 
     public static void register(@NotNull Customer customer) throws SQLException
     {
@@ -47,5 +48,13 @@ public class CustomerManagementService
         {
             return null;
         }
+    }
+
+    public static void deleteCustomerByID(int id) throws SQLException
+    {
+        PreparedStatement statement = connectionFactory.getConnection().prepareStatement(deleteCustomerByIDSQL);
+
+        statement.setInt(1, id);
+        statement.executeQuery();
     }
 }
