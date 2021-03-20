@@ -14,7 +14,7 @@ CREATE TABLE employee
     full_name  VARCHAR(64)  NOT NULL,
     sin_number VARCHAR(9)   NOT NULL,
     address    VARCHAR(128) NOT NULL,
-    salary     NUMERIC(8, 2) DEFAULT 0.00,
+    salary     NUMERIC(10, 2) DEFAULT 0.00,
     role       VARCHAR(64)  NOT NULL,
     PRIMARY KEY (id)
 );
@@ -69,7 +69,7 @@ CREATE TABLE hotel_phone_number
     hotel_name       VARCHAR(64),
     phone_number     VARCHAR(16) NOT NULL,
     PRIMARY KEY (hotel_brand_name, hotel_name),
-    FOREIGN KEY (hotel_brand_name, hotel_name) REFERENCES hotel (hotel_name, hotel_brand_name) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (hotel_brand_name, hotel_name) REFERENCES hotel (hotel_brand_name, hotel_name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- TODO: May create more room capacity
@@ -78,7 +78,7 @@ CREATE TABLE room
     hotel_brand_name VARCHAR(64),
     hotel_name       VARCHAR(64),
     room_id          INT,
-    price            NUMERIC(4, 2) DEFAULT 0.00,
+    price            NUMERIC(8, 2) DEFAULT 0.00,
     --amenity
     room_capacity    VARCHAR(16) NOT NULL,
     --view
@@ -143,7 +143,7 @@ CREATE TABLE rent
     date                   DATE        NOT NULL,
     room_type              VARCHAR(16) NOT NULL,
     total_number_occupants INT           DEFAULT 1,
-    bill_amount            NUMERIC(4, 2) DEFAULT 0.0,
+    bill_amount            NUMERIC(10, 2) DEFAULT 0.0,
     duration               INTERVAL    NOT NULL,
     PRIMARY KEY (customer_id, hotel_brand_name, hotel_name, room_id),
     FOREIGN KEY (customer_id) REFERENCES customer (id) ON UPDATE CASCADE,

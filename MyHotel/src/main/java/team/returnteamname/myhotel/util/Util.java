@@ -42,4 +42,15 @@ public class Util
 
         return stringBuilder.toString();
     }
+
+    public static void assertString(String string, String target)
+    {
+        assertString(string, target, "");
+    }
+    public static void assertString(String string, String target, String extraMessage)
+    {
+        if (!string.equals(target))
+            throw new AssertionError(
+                "Assertion failed: \"" + string + "\", expected \"" + target + "\", message: " + extraMessage);
+    }
 }

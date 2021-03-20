@@ -1,0 +1,33 @@
+{
+    "name": "root",
+    "type": "menu",
+    "content": [
+        {
+            "name": "Single table operation",
+            "type": "menu",
+            "content": [
+                {
+                    "name": "Dummy",
+                    "type": "action",
+                    "content": "team.returnteamname.myhotel.ui.menu.actions.Dummy"
+                }
+            ]
+        },
+        {
+            "name": "Object-based operation",
+            "type": "menu",
+            "content": [
+                {
+                    "name": "Dummy2",
+                    "type": "action",
+                    "content": ".ui.menu.actions.Dummy"
+                }
+            ]
+        },
+        {
+            "name": "Quit program",
+            "type": "action",
+            "content": ".ui.menu.actions.Quit"
+        }
+    ]
+}

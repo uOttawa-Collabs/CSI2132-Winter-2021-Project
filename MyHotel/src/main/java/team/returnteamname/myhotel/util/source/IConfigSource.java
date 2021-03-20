@@ -1,4 +1,4 @@
-package team.returnteamname.myhotel.config.source;
+package team.returnteamname.myhotel.util.source;
 
 import java.io.IOException;
 

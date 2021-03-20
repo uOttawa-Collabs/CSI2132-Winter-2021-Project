@@ -1,4 +1,4 @@
-package team.returnteamname.myhotel.config.source;
+package team.returnteamname.myhotel.util.source;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,9 +13,7 @@ public class FileConfigSource implements IConfigSource
 
     private boolean isSourceLoaded;
 
-    public FileConfigSource(
-        @NotNull
-            String filePath)
+    public FileConfigSource(@NotNull String filePath)
     {
         this.filePath = filePath;
     }
