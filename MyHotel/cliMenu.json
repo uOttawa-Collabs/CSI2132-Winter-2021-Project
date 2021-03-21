@@ -8,9 +8,40 @@
             "content": ".ui.menu.actions.SingleTableOperationAction"
         },
         {
-            "name": "Management",
+            "name": "Applications",
             "type": "menu",
-            "content": []
+            "content": [
+                {
+                    "name": "Employee management",
+                    "type": "action",
+                    "content": ".ui.menu.actions.EmployeeManagementAction"
+                },
+                {
+                    "name": "Customer management",
+                    "type": "action",
+                    "content": ".ui.menu.actions.CustomerManagementAction"
+                },
+                {
+                    "name": "Hotel management",
+                    "type": "action",
+                    "content": ".ui.menu.actions.HotelManagementAction"
+                },
+                {
+                    "name": "Employment management",
+                    "type": "action",
+                    "content": ".ui.menu.actions.EmploymentManagementAction"
+                },
+                {
+                    "name": "Booking management",
+                    "type": "action",
+                    "content": ".ui.menu.actions.BookingManagementAction"
+                },
+                {
+                    "name": "Renting management",
+                    "type": "action",
+                    "content": ".ui.menu.actions.RentingManagementAction"
+                }
+            ]
         },
         {
             "name": "Execute custom SQL statement",

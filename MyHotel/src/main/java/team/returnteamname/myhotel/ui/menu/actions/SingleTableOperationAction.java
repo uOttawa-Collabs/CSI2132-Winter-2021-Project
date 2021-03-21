@@ -6,15 +6,19 @@ import team.returnteamname.myhotel.dao.BaseDao;
 import team.returnteamname.myhotel.pojo.AbstractPojo;
 import team.returnteamname.myhotel.ui.IUserInterface;
 import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.util.Pair;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class SingleTableOperationAction extends AbstractAction
 {
-    private static final String[] operationList = { "Insert", "Delete", "Query", "Update", "Quit" };
+    private static final String[] operationList = { "Insert", "Delete", "Query", "Update" };
 
     @Override
     public Object run(IUserInterface userInterface)
@@ -31,10 +35,12 @@ public class SingleTableOperationAction extends AbstractAction
             {
                 operatePojo(userInterface, pojoClass);
             }
-            while (Character.toUpperCase(
-                ((String) userInterface.eventCallback("readLine", "More operations? <Y/n>")).charAt(0)) == 'Y');
+            while (((Supplier<Boolean>) () ->
+            {
+                String input = (String) userInterface.eventCallback("readLine", "More operations? <y/N>");
+                return !input.isEmpty() && (Character.toUpperCase(input.charAt(0)) == 'Y');
+            }).get());
         }
-
     }
 
     private void printPojoList(IUserInterface userInterface)
@@ -51,7 +57,7 @@ public class SingleTableOperationAction extends AbstractAction
             try
             {
                 String input = (String) userInterface
-                    .eventCallback("readLine", "Please choose one from the list, or type \"Quit\" to quit: ");
+                    .eventCallback("readLine", "Please choose one from the list, or type \"Quit\" to quit");
 
                 if (input.equals("Quit"))
                     return null;
@@ -87,8 +93,6 @@ public class SingleTableOperationAction extends AbstractAction
                     return;
                 case "Update":
                     doUpdate(userInterface, pojoClass);
-                    return;
-                case "Cancel":
                     return;
                 default:
                     userInterface.eventCallback("printLine", "Invalid operation, please try again.");
@@ -151,7 +155,7 @@ public class SingleTableOperationAction extends AbstractAction
     }
 
     private AbstractPojo getPojoInstanceFromUser(IUserInterface userInterface, Class<?> pojoClass)
-        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException
+        throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
     {
         AbstractPojo pojo   = (AbstractPojo) pojoClass.getDeclaredConstructor().newInstance();
         Field[]      fields = pojoClass.getDeclaredFields();
@@ -198,8 +202,8 @@ public class SingleTableOperationAction extends AbstractAction
             userInterface.eventCallback("printLine", "Please populate the object that is to be inserted.");
             AbstractPojo pojo        = getPojoInstanceFromUser(userInterface, pojoClass);
             BaseDao      dao         = new BaseDao();
-            int          rowAffected = dao.insert(pojo);
-            userInterface.eventCallback("printLine", "Row affected: " + rowAffected);
+            int          rowsAffected = dao.insert(pojo);
+            userInterface.eventCallback("printLine", "Rows affected: " + rowsAffected);
         }
         catch (Exception e)
         {
@@ -215,8 +219,8 @@ public class SingleTableOperationAction extends AbstractAction
             userInterface.eventCallback("printLine", "Please populate the matcher.");
             AbstractPojo matcher     = getPojoInstanceFromUser(userInterface, pojoClass);
             BaseDao      dao         = new BaseDao();
-            int          rowAffected = dao.delete(matcher);
-            userInterface.eventCallback("printLine", "Row affected: " + rowAffected);
+            int          rowsAffected = dao.delete(matcher);
+            userInterface.eventCallback("printLine", "Rows affected: " + rowsAffected);
         }
         catch (Exception e)
         {
@@ -227,7 +231,23 @@ public class SingleTableOperationAction extends AbstractAction
 
     private void doQuery(IUserInterface userInterface, Class<?> pojoClass)
     {
+        try
+        {
+            userInterface.eventCallback("printLine", "Please populate the matcher.");
+            AbstractPojo matcher     = getPojoInstanceFromUser(userInterface, pojoClass);
+            BaseDao         dao  = new BaseDao();
+            Pair<ArrayList<AbstractPojo>, ResultSet> pair = dao.select(matcher);
 
+            userInterface.eventCallback("printLine", "Results:");
+
+            for (AbstractPojo pojo : pair.getKey())
+                userInterface.eventCallback("printLine", pojo);
+        }
+        catch (Exception e)
+        {
+            userInterface.eventCallback("printLine", "Operation failed.");
+            userInterface.eventCallback("printLine", "Reason: " + e);
+        }
     }
 
     private void doUpdate(IUserInterface userInterface, Class<?> pojoClass)
@@ -239,8 +259,8 @@ public class SingleTableOperationAction extends AbstractAction
             userInterface.eventCallback("printLine", "Please populate the carrier.");
             AbstractPojo carrier     = getPojoInstanceFromUser(userInterface, pojoClass);
             BaseDao      dao         = new BaseDao();
-            int          rowAffected = dao.update(matcher, carrier);
-            userInterface.eventCallback("printLine", "Row affected: " + rowAffected);
+            int          rowsAffected = dao.update(matcher, carrier);
+            userInterface.eventCallback("printLine", "Rows affected: " + rowsAffected);
         }
         catch (Exception e)
         {

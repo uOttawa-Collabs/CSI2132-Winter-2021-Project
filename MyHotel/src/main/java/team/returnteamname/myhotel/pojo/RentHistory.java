@@ -6,7 +6,7 @@ import org.postgresql.util.PGInterval;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-public class Rent extends AbstractPojo
+public class RentHistory extends AbstractPojo
 {
     private Integer    customerId;
     private String     hotelBrandName;
@@ -18,14 +18,20 @@ public class Rent extends AbstractPojo
     private Integer    checkInEmployeeId;
     private BigDecimal billAmount;
     private PGInterval duration;
+    private Integer    checkOutEmployeeId;
+    private Date       checkOutDate;
 
-    public Rent()
+    public RentHistory()
     {}
 
-    public Rent(@Nullable Integer customerId, @Nullable String hotelBrandName, @Nullable String hotelName,
-                @Nullable Integer roomId, @Nullable Date checkInDate,
-                @Nullable String roomType, @Nullable Integer totalNumberOccupants, @Nullable Integer checkInEmployeeId,
-                @Nullable BigDecimal billAmount, @Nullable PGInterval duration)
+    public RentHistory(@Nullable Integer customerId, @Nullable String hotelBrandName, @Nullable String hotelName,
+                       @Nullable Integer roomId, @Nullable Date checkInDate,
+                       @Nullable String roomType, @Nullable Integer totalNumberOccupants,
+                       @Nullable Integer checkInEmployeeId,
+                       @Nullable BigDecimal billAmount,
+                       @Nullable PGInterval duration,
+                       @Nullable Integer checkOutEmployeeId,
+                       @Nullable Date checkOutDate)
     {
         this.customerId           = customerId;
         this.hotelBrandName       = hotelBrandName;
@@ -37,6 +43,8 @@ public class Rent extends AbstractPojo
         this.checkInEmployeeId    = checkInEmployeeId;
         this.billAmount           = billAmount;
         this.duration             = duration;
+        this.checkOutEmployeeId   = checkOutEmployeeId;
+        this.checkOutDate         = checkOutDate;
     }
 
     @Nullable
@@ -147,5 +155,25 @@ public class Rent extends AbstractPojo
     public void setDuration(@Nullable PGInterval duration)
     {
         this.duration = duration;
+    }
+
+    public Integer getCheckOutEmployeeId()
+    {
+        return checkOutEmployeeId;
+    }
+
+    public void setCheckOutEmployeeId(Integer checkOutEmployeeId)
+    {
+        this.checkOutEmployeeId = checkOutEmployeeId;
+    }
+
+    public Date getCheckOutDate()
+    {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate)
+    {
+        this.checkOutDate = checkOutDate;
     }
 }

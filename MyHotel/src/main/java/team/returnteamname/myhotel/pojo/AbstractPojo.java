@@ -30,7 +30,7 @@ public abstract class AbstractPojo implements Serializable
                     Object returnValue = method.invoke(this, (Object[]) null);
 
                     if (comma)
-                        stringBuilder.append(", ");
+                        stringBuilder.append(" | ");
                     stringBuilder.append(fieldName).append(" = ").append(returnValue);
                     comma = true;
                 }

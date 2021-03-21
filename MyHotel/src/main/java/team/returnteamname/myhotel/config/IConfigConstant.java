@@ -7,6 +7,6 @@ public interface IConfigConstant
     String   MENU_FILE_PATH    = "cliMenu.json";
     String[] POJO_LIST         = { "Book", "Customer", "Employee", "Employment", "HotelBrand",
                                    "HotelBrandEmailAddress", "HotelBrandPhoneNumber", "Hotel", "HotelPhoneNumber",
-                                   "Rent",
+                                   "Rent", "RentHistory",
                                    "Room", "RoomAmenity", "RoomExtensibility", "RoomView" };
 }

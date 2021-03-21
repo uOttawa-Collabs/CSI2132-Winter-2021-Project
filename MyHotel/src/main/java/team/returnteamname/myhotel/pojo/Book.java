@@ -10,7 +10,7 @@ public class Book extends AbstractPojo
     private String  hotelBrandName;
     private String  hotelName;
     private Integer roomId;
-    private Date    date;
+    private Date    checkInDate;
     private String  roomType;
     private Integer totalNumberOccupants;
 
@@ -18,14 +18,14 @@ public class Book extends AbstractPojo
     {}
 
     public Book(@Nullable Integer customerId, @Nullable String hotelBrandName, @Nullable String hotelName,
-                @Nullable Integer roomId, @Nullable Date date,
+                @Nullable Integer roomId, @Nullable Date checkInDate,
                 @Nullable String roomType, @Nullable Integer totalNumberOccupants)
     {
         this.customerId           = customerId;
         this.hotelBrandName       = hotelBrandName;
         this.hotelName            = hotelName;
         this.roomId               = roomId;
-        this.date                 = date;
+        this.checkInDate          = checkInDate;
         this.roomType             = roomType;
         this.totalNumberOccupants = totalNumberOccupants;
     }
@@ -75,14 +75,14 @@ public class Book extends AbstractPojo
     }
 
     @Nullable
-    public Date getDate()
+    public Date getCheckInDate()
     {
-        return date;
+        return checkInDate;
     }
 
-    public void setDate(@Nullable Date date)
+    public void setCheckInDate(@Nullable Date checkInDate)
     {
-        this.date = date;
+        this.checkInDate = checkInDate;
     }
 
     @Nullable

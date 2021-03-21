@@ -125,7 +125,7 @@ CREATE TABLE book
     hotel_brand_name       VARCHAR(64),
     hotel_name             VARCHAR(64),
     room_id                INT,
-    date                   DATE        NOT NULL,
+    check_in_date          DATE        NOT NULL,
     room_type              VARCHAR(16) NOT NULL,
     total_number_occupants INT DEFAULT 1,
     PRIMARY KEY (customer_id, hotel_brand_name, hotel_name, room_id),
@@ -139,16 +139,37 @@ CREATE TABLE rent
     hotel_brand_name       VARCHAR(64),
     hotel_name             VARCHAR(64),
     room_id                INT,
-    employee_id            INT,
-    date                   DATE        NOT NULL,
+    check_in_employee_id   INT         NOT NULL,
+    check_in_date          DATE        NOT NULL,
     room_type              VARCHAR(16) NOT NULL,
-    total_number_occupants INT           DEFAULT 1,
+    total_number_occupants INT            DEFAULT 1,
     bill_amount            NUMERIC(10, 2) DEFAULT 0.0,
     duration               INTERVAL    NOT NULL,
     PRIMARY KEY (customer_id, hotel_brand_name, hotel_name, room_id),
     FOREIGN KEY (customer_id) REFERENCES customer (id) ON UPDATE CASCADE,
     FOREIGN KEY (hotel_brand_name, hotel_name, room_id) REFERENCES room (hotel_brand_name, hotel_name, room_id) ON UPDATE CASCADE,
-    FOREIGN KEY (employee_id) REFERENCES employee (id) ON UPDATE CASCADE
+    FOREIGN KEY (check_in_employee_id) REFERENCES employee (id) ON UPDATE CASCADE
+);
+
+CREATE TABLE rent_history
+(
+    customer_id            INT,
+    hotel_brand_name       VARCHAR(64),
+    hotel_name             VARCHAR(64),
+    room_id                INT,
+    check_in_employee_id   INT         NOT NULL,
+    check_in_date          DATE        NOT NULL,
+    room_type              VARCHAR(16) NOT NULL,
+    total_number_occupants INT            DEFAULT 1,
+    bill_amount            NUMERIC(10, 2) DEFAULT 0.0,
+    duration               INTERVAL    NOT NULL,
+    check_out_employee_id  INT         NOT NULL,
+    check_out_date         DATE        NOT NULL,
+    PRIMARY KEY (customer_id, hotel_brand_name, hotel_name, room_id),
+    FOREIGN KEY (customer_id) REFERENCES customer (id) ON UPDATE CASCADE,
+    FOREIGN KEY (hotel_brand_name, hotel_name, room_id) REFERENCES room (hotel_brand_name, hotel_name, room_id) ON UPDATE CASCADE,
+    FOREIGN KEY (check_in_employee_id) REFERENCES employee (id) ON UPDATE CASCADE,
+    FOREIGN KEY (check_out_employee_id) REFERENCES employee (id) ON UPDATE CASCADE
 );
 
 CREATE TABLE employment
@@ -162,10 +183,17 @@ CREATE TABLE employment
 );
 
 -- Administrator
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO xwang532;
+GRANT
+ALL
+PRIVILEGES
+ON
+ALL
+TABLES IN SCHEMA PUBLIC TO xwang532;
 
 -- All employees connected to the database uses this account
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO fzhan081;
+GRANT ALL PRIVILEGES ON ALL
+TABLES IN SCHEMA PUBLIC TO fzhan081;
 
 -- All customers connected to the database uses this account
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO jguo108;
+GRANT ALL PRIVILEGES ON ALL
+TABLES IN SCHEMA PUBLIC TO jguo108;
