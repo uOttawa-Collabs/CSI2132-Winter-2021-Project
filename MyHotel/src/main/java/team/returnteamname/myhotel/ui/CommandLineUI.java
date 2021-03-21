@@ -48,10 +48,13 @@ public class CommandLineUI implements IUserInterface
                 case "Quit":
                     continueLoop = false;
                     break;
+                case "print":
+                    printStream.print(parameter);
+                    break;
                 case "printLine":
                     printStream.println(parameter);
                     break;
-                case "inputLine":
+                case "readLine":
                     printStream.print(parameter + ": ");
                     object = bufferedReader.readLine();
                     break;
@@ -72,21 +75,21 @@ public class CommandLineUI implements IUserInterface
         printStream.println("Welcome to MyHotel - hotel database management system\n");
     }
 
-    private void menuLoop()
+    private void menuLoop() throws IOException
     {
         Menu currentMenu = Menu.getRootMenu();
         while (continueLoop)
         {
-            boolean isRoot = currentMenu.getParent() == null;
-            int childrenCount = currentMenu.getChildren().size();
-            int actionCount = currentMenu.getActions().size();
+            boolean isRoot        = currentMenu.getParent() == null;
+            int     childrenCount = currentMenu.getChildren().size();
+            int     actionCount   = currentMenu.getActions().size();
 
-            printStream.println("Current location: " + currentMenu.getPath());
+            printStream.println("Current location: " + currentMenu.getPath() + "\n");
 
             int i = 0;
             if (!isRoot)
             {
-                printStream.println((i) + ": Parent menu");
+                printStream.println((i) + ": Parent menu/");
             }
             ++i;
 
@@ -101,8 +104,8 @@ public class CommandLineUI implements IUserInterface
             }
 
             int choice;
-            printStream.println("Please choose an operation: ");
-            for (;;)
+            printStream.println("\nPlease choose an operation: ");
+            for (; ; )
             {
                 try
                 {
@@ -114,11 +117,7 @@ public class CommandLineUI implements IUserInterface
                 }
                 catch (NumberFormatException e)
                 {
-                    printStream.println("Please enter a valid number.");
-                }
-                catch (IOException e)
-                {
-                    throw new RuntimeException(e);
+                    printStream.println("Please enter a valid number. Try again: ");
                 }
             }
 

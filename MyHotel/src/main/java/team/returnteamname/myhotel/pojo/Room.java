@@ -12,6 +12,9 @@ public class Room extends AbstractPojo
     private BigDecimal price;
     private String     roomCapacity;
 
+    public Room()
+    {}
+
     public Room(@Nullable String hotelBrandName, @Nullable String hotelName, @Nullable Integer roomId,
                 @Nullable BigDecimal price, @Nullable String roomCapacity)
     {

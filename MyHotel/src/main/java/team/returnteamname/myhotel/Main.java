@@ -1,21 +1,18 @@
 package team.returnteamname.myhotel;
 
-import org.postgresql.util.PGInterval;
 import team.returnteamname.myhotel.config.ConfigManager;
-import team.returnteamname.myhotel.util.source.FileConfigSource;
-import team.returnteamname.myhotel.util.source.IConfigSource;
+import team.returnteamname.myhotel.config.IConfigConstant;
 import team.returnteamname.myhotel.ui.CommandLineUI;
 import team.returnteamname.myhotel.ui.IUserInterface;
 import team.returnteamname.myhotel.ui.menu.Menu;
+import team.returnteamname.myhotel.util.source.FileConfigSource;
+import team.returnteamname.myhotel.util.source.IConfigSource;
 
-import java.io.*;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 public class Main
 {
-    private final static String configFilePath = "config.json";
-    private final static String menuFilePath = "cliMenu.json";
-
     public static void main(String[] args)
     {
         try
@@ -34,12 +31,12 @@ public class Main
         throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchFieldException
     {
         // Load config
-        IConfigSource configSource = new FileConfigSource(configFilePath);
+        IConfigSource configSource = new FileConfigSource(IConfigConstant.CONFIG_FILE_PATH);
         configSource.loadSource();
         ConfigManager.getInstance().load(configSource.getConfigString());
 
         // Load menu
-        IConfigSource menuSource = new FileConfigSource(menuFilePath);
+        IConfigSource menuSource = new FileConfigSource(IConfigConstant.MENU_FILE_PATH);
         menuSource.loadSource();
         Menu.loadMenu(menuSource.getConfigString());
     }

@@ -4,30 +4,23 @@
     "content": [
         {
             "name": "Single table operation",
-            "type": "menu",
-            "content": [
-                {
-                    "name": "Dummy",
-                    "type": "action",
-                    "content": "team.returnteamname.myhotel.ui.menu.actions.Dummy"
-                }
-            ]
+            "type": "action",
+            "content": ".ui.menu.actions.SingleTableOperationAction"
         },
         {
-            "name": "Object-based operation",
+            "name": "Management",
             "type": "menu",
-            "content": [
-                {
-                    "name": "Dummy2",
-                    "type": "action",
-                    "content": ".ui.menu.actions.Dummy"
-                }
-            ]
+            "content": []
+        },
+        {
+            "name": "Execute custom SQL statement",
+            "type": "action",
+            "content": ".ui.menu.actions.ExecuteSqlAction"
         },
         {
             "name": "Quit program",
             "type": "action",
-            "content": ".ui.menu.actions.Quit"
+            "content": ".ui.menu.actions.QuitAction"
         }
     ]
 }

@@ -2,6 +2,7 @@ package team.returnteamname.myhotel.ui.menu;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.stream.JsonReader;
+import team.returnteamname.myhotel.config.IConfigConstant;
 import team.returnteamname.myhotel.util.Util;
 
 import java.io.IOException;
@@ -12,13 +13,12 @@ import java.util.ArrayList;
 
 public class Menu
 {
-    private static final String rootPackageName = "team.returnteamname.myhotel";
-    private static       Menu   rootMenu;
+    private static Menu rootMenu;
 
     private final ArrayList<AbstractAction> actions;
     private final ArrayList<Menu>           children;
-    private       String             name;
-    private       Menu               parent;
+    private       String                    name;
+    private       Menu                      parent;
 
     public Menu()
     {
@@ -38,10 +38,10 @@ public class Menu
     public static void loadMenu(String source)
         throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchFieldException
     {
-        rootMenu        = new Menu();
+        rootMenu = new Menu();
         JsonReader jsonReader = new JsonReader(new StringReader(source));
         loadMenuRecursion(rootMenu, jsonReader);
-        rootMenu = rootMenu.getChildren().get(0);
+        rootMenu        = rootMenu.getChildren().get(0);
         rootMenu.parent = null;
     }
 
@@ -82,7 +82,7 @@ public class Menu
                     if (className.isEmpty())
                         break;
                     if (className.startsWith("."))
-                        className = rootPackageName + className;
+                        className = IConfigConstant.ROOT_PACKAGE_NAME + className;
 
                     Class<?> clazz = Class.forName(className);
                     Object instance = clazz.getDeclaredConstructor().newInstance();
@@ -131,7 +131,7 @@ public class Menu
 
     public String getPath()
     {
-        Menu menu = this;
+        Menu          menu = this;
         StringBuilder path = new StringBuilder();
         getPathRecursion(menu, path);
         return path.toString();

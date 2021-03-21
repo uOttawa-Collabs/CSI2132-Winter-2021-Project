@@ -22,12 +22,12 @@ public class BaseDao
     public BaseDao()
     {}
 
-    public static ResultSet doQuery(@NotNull String query) throws SQLException
+    public static ResultSet query(@NotNull String query) throws SQLException
     {
         return ConnectionFactory.getInstance().getConnection().createStatement().executeQuery(query);
     }
 
-    public static ResultSet doQuery(@NotNull PreparedStatement preparedStatement) throws SQLException
+    public static ResultSet query(@NotNull PreparedStatement preparedStatement) throws SQLException
     {
         return preparedStatement.executeQuery();
     }
@@ -57,7 +57,7 @@ public class BaseDao
         return attributeMap;
     }
 
-    public int doInsert(@NotNull AbstractPojo pojo) throws SQLException
+    public int insert(@NotNull AbstractPojo pojo) throws SQLException
     {
         try
         {
@@ -111,7 +111,7 @@ public class BaseDao
         }
     }
 
-    public int doDelete(@NotNull AbstractPojo matcher) throws SQLException
+    public int delete(@NotNull AbstractPojo matcher) throws SQLException
     {
         try
         {
@@ -158,7 +158,7 @@ public class BaseDao
         }
     }
 
-    public Pair<ArrayList<AbstractPojo>, ResultSet> doSelect(@NotNull AbstractPojo matcher) throws SQLException
+    public Pair<ArrayList<AbstractPojo>, ResultSet> select(@NotNull AbstractPojo matcher) throws SQLException
     {
         try
         {
@@ -221,7 +221,7 @@ public class BaseDao
         }
     }
 
-    public int doUpdate(@NotNull AbstractPojo matcher, @NotNull AbstractPojo carrier) throws SQLException
+    public int update(@NotNull AbstractPojo matcher, @NotNull AbstractPojo carrier) throws SQLException
     {
         try
         {
