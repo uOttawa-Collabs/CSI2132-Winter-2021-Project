@@ -21,7 +21,7 @@ public class ExecuteSqlAction extends AbstractAction
 
             try
             {
-                if (query.startsWith("SELECT"))
+                if (query.toUpperCase().startsWith("SELECT"))
                     printResultSet(userInterface, BaseDao.query(query));
                 else
                 {
