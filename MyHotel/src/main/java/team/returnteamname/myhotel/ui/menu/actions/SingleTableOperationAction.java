@@ -200,8 +200,8 @@ public class SingleTableOperationAction extends AbstractAction
         try
         {
             userInterface.eventCallback("printLine", "Please populate the object that is to be inserted.");
-            AbstractPojo pojo        = getPojoInstanceFromUser(userInterface, pojoClass);
-            BaseDao      dao         = new BaseDao();
+            AbstractPojo pojo         = getPojoInstanceFromUser(userInterface, pojoClass);
+            BaseDao      dao          = new BaseDao();
             int          rowsAffected = dao.insert(pojo);
             userInterface.eventCallback("printLine", "Rows affected: " + rowsAffected);
         }
@@ -217,8 +217,8 @@ public class SingleTableOperationAction extends AbstractAction
         try
         {
             userInterface.eventCallback("printLine", "Please populate the matcher.");
-            AbstractPojo matcher     = getPojoInstanceFromUser(userInterface, pojoClass);
-            BaseDao      dao         = new BaseDao();
+            AbstractPojo matcher      = getPojoInstanceFromUser(userInterface, pojoClass);
+            BaseDao      dao          = new BaseDao();
             int          rowsAffected = dao.delete(matcher);
             userInterface.eventCallback("printLine", "Rows affected: " + rowsAffected);
         }
@@ -234,9 +234,9 @@ public class SingleTableOperationAction extends AbstractAction
         try
         {
             userInterface.eventCallback("printLine", "Please populate the matcher.");
-            AbstractPojo matcher     = getPojoInstanceFromUser(userInterface, pojoClass);
-            BaseDao         dao  = new BaseDao();
-            Pair<ArrayList<AbstractPojo>, ResultSet> pair = dao.select(matcher);
+            AbstractPojo                             matcher = getPojoInstanceFromUser(userInterface, pojoClass);
+            BaseDao                                  dao     = new BaseDao();
+            Pair<ArrayList<AbstractPojo>, ResultSet> pair    = dao.select(matcher);
 
             userInterface.eventCallback("printLine", "Results:");
 
@@ -257,8 +257,8 @@ public class SingleTableOperationAction extends AbstractAction
             userInterface.eventCallback("printLine", "Please populate the matcher.");
             AbstractPojo matcher = getPojoInstanceFromUser(userInterface, pojoClass);
             userInterface.eventCallback("printLine", "Please populate the carrier.");
-            AbstractPojo carrier     = getPojoInstanceFromUser(userInterface, pojoClass);
-            BaseDao      dao         = new BaseDao();
+            AbstractPojo carrier      = getPojoInstanceFromUser(userInterface, pojoClass);
+            BaseDao      dao          = new BaseDao();
             int          rowsAffected = dao.update(matcher, carrier);
             userInterface.eventCallback("printLine", "Rows affected: " + rowsAffected);
         }

@@ -27,9 +27,19 @@ public class BaseDao
         return ConnectionFactory.getInstance().getConnection().createStatement().executeQuery(query);
     }
 
+    public static int update(@NotNull String query) throws SQLException
+    {
+        return ConnectionFactory.getInstance().getConnection().createStatement().executeUpdate(query);
+    }
+
     public static ResultSet query(@NotNull PreparedStatement preparedStatement) throws SQLException
     {
         return preparedStatement.executeQuery();
+    }
+
+    public static int update(@NotNull PreparedStatement preparedStatement) throws SQLException
+    {
+        return preparedStatement.executeUpdate();
     }
 
     private static Map<String, Object> getAttributeMap(AbstractPojo pojo)
