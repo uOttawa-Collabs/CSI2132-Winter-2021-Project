@@ -31,3 +31,126 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+// Generate IConfigConstant
+private static String[] getPojoList(String rootProjectRootPath)
+{
+    final String[] list = new File(rootProjectRootPath + "/pojo").list()
+
+    ArrayList<String> pojoList = new ArrayList<>()
+    for (String string : list)
+    {
+        if (!(string in ["AbstractPojo.java"]))
+        {
+            pojoList.add(string.substring(0, string.length() - 5))
+        }
+    }
+
+    return pojoList
+}
+
+class SimpleConfigGenerator
+{
+    private static final String notice = "/* This config is automatically generated and overwritten by build.gradle. */"
+
+    private final String            packageName
+    private final String            configClassName
+    private       ArrayList<String> formattedConstantList
+
+    SimpleConfigGenerator(String packageName, String configClassName)
+    {
+        this.packageName = packageName
+        this.configClassName = configClassName
+        this.formattedConstantList = new ArrayList<>()
+    }
+
+    void addObject(String name, Object object)
+    {
+        Class<?> clazz = object.getClass()
+        formattedConstantList.add(clazz.getCanonicalName() + " " + name + " = " + getJavaRepresentation(object))
+    }
+
+    String generate()
+    {
+        StringBuilder stringBuilder = new StringBuilder(notice).append("\n\n").append("package ").append(packageName).append(";\n\n")
+
+        stringBuilder.append("public interface ").append(configClassName).append('\n')
+        stringBuilder.append('{').append('\n')
+
+        for (String string : formattedConstantList)
+            stringBuilder.append("    ").append(string).append(";\n")
+
+        stringBuilder.append('}').append('\n')
+    }
+
+    private static String getJavaRepresentation(Object object)
+    {
+        StringBuilder stringBuilder = new StringBuilder()
+        Class clazz = object.getClass()
+
+        if (clazz.isArray())
+        {
+            String name = clazz.getCanonicalName()
+            int count = name.count("[]")
+            recursionGetArrayRepresentation(count, stringBuilder, object)
+        }
+        else if (clazz == String.class)
+        {
+            return '\"' + object.toString() + '\"'
+        }
+        else if (clazz == Integer.class)
+        {
+            return Integer.toString((Integer) object)
+        }
+        else    // TODO: You can add more cases here to handle more types
+            throw new UnsupportedOperationException("Class " + clazz.getCanonicalName() + " is currently not supported")
+
+        return stringBuilder.toString()
+    }
+
+    private static void recursionGetArrayRepresentation(int depth, StringBuilder stringBuilder, Object object)
+    {
+        stringBuilder.append('{')
+        Object[] array = (Object[]) object
+
+        if (depth == 1)
+        {
+            stringBuilder.append(' ').append(getJavaRepresentation(array[0]))
+
+            for (int i = 1; i < array.length; ++i)
+                stringBuilder.append(', ').append(getJavaRepresentation(array[i]))
+
+            stringBuilder.append(' ')
+        }
+        else
+        {
+            recursionGetArrayRepresentation(depth - 1, stringBuilder, array[0])
+
+            for (int i = 1; i < array.length; ++i)
+            {
+                stringBuilder.append(", ")
+                recursionGetArrayRepresentation(depth - 1, stringBuilder, array[i])
+            }
+        }
+
+        stringBuilder.append('}')
+    }
+}
+
+task generateConstants {
+    final String rootPackageName = this.getGroup() + "." + getRootProject().getName().toLowerCase()
+    final String rootProjectRootPath = "src/main/java/" + this.getGroup().toString().replaceAll("\\.", "/") + "/" + getRootProject().getName()
+    final String configClassName = "IConfigConstant"
+    final SimpleConfigGenerator simpleConfigGenerator = new SimpleConfigGenerator(rootPackageName + ".config", configClassName)
+
+    simpleConfigGenerator.addObject("ROOT_PACKAGE_NAME", rootPackageName)
+    simpleConfigGenerator.addObject("CONFIG_FILE_PATH", "config.json")
+    simpleConfigGenerator.addObject("MENU_FILE_PATH", "cliMenu.json")
+    simpleConfigGenerator.addObject("POJO_LIST", getPojoList(rootProjectRootPath))
+
+    FileWriter fileWriter = new FileWriter(new File(rootProjectRootPath + "/config/" + configClassName + ".java"))
+    fileWriter.write(simpleConfigGenerator.generate())
+    fileWriter.close()
+}
+
+build.dependsOn generateConstants

@@ -12,34 +12,53 @@
             "type": "menu",
             "content": [
                 {
-                    "name": "Employee management",
-                    "type": "action",
-                    "content": ".ui.menu.actions.EmployeeManagementAction"
-                },
-                {
-                    "name": "Customer management",
-                    "type": "action",
-                    "content": ".ui.menu.actions.CustomerManagementAction"
-                },
-                {
                     "name": "Hotel management",
-                    "type": "action",
-                    "content": ".ui.menu.actions.HotelManagementAction"
+                    "type": "menu",
+                    "content": [
+                        {
+                            "name": "Register a hotel",
+                            "type": "action",
+                            "content": ".ui.menu.actions.HotelRegistrationAction"
+                        }
+                    ]
                 },
                 {
                     "name": "Employment management",
-                    "type": "action",
-                    "content": ".ui.menu.actions.EmploymentManagementAction"
+                    "type": "menu",
+                    "content": [
+                        {
+                            "name": "Assign an employee",
+                            "type": "action",
+                            "content": ".ui.menu.actions.EmploymentAssignmentAction"
+                        },
+                        {
+                            "name": "Withdraw an employee",
+                            "type": "action",
+                            "content": ".ui.menu.actions.EmploymentWithdrawalAction"
+                        }
+                    ]
                 },
                 {
                     "name": "Booking management",
-                    "type": "action",
-                    "content": ".ui.menu.actions.BookingManagementAction"
+                    "type": "menu",
+                    "content": [
+                        {
+                            "name": "Transfer booking record to rent record",
+                            "type": "action",
+                            "content": ".ui.menu.actions.BookingTransferAction"
+                        }
+                    ]
                 },
                 {
                     "name": "Renting management",
-                    "type": "action",
-                    "content": ".ui.menu.actions.RentingManagementAction"
+                    "type": "menu",
+                    "content": [
+                        {
+                            "name": "Extending a rent record",
+                            "type": "action",
+                            "content": ".ui.menu.actions.RentExtensionAction"
+                        }
+                    ]
                 }
             ]
         },
