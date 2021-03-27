@@ -5,7 +5,7 @@
         {
             "name": "Single table operation",
             "type": "action",
-            "content": ".ui.menu.actions.SingleTableOperationAction"
+            "content": ".actions.cli.SingleTableOperationAction"
         },
         {
             "name": "Applications",
@@ -18,7 +18,7 @@
                         {
                             "name": "Register a hotel",
                             "type": "action",
-                            "content": ".ui.menu.actions.HotelRegistrationAction"
+                            "content": ".actions.cli.HotelRegistrationAction"
                         }
                     ]
                 },
@@ -29,23 +29,12 @@
                         {
                             "name": "Assign an employee",
                             "type": "action",
-                            "content": ".ui.menu.actions.EmploymentAssignmentAction"
+                            "content": ".actions.cli.EmploymentAssignmentAction"
                         },
                         {
                             "name": "Withdraw an employee",
                             "type": "action",
-                            "content": ".ui.menu.actions.EmploymentWithdrawalAction"
-                        }
-                    ]
-                },
-                {
-                    "name": "Booking management",
-                    "type": "menu",
-                    "content": [
-                        {
-                            "name": "Transfer booking record to rent record",
-                            "type": "action",
-                            "content": ".ui.menu.actions.BookingTransferAction"
+                            "content": ".actions.cli.EmploymentWithdrawalAction"
                         }
                     ]
                 },
@@ -56,7 +45,7 @@
                         {
                             "name": "Extending a rent record",
                             "type": "action",
-                            "content": ".ui.menu.actions.RentExtensionAction"
+                            "content": ".actions.cli.RentExtensionAction"
                         }
                     ]
                 }
@@ -65,12 +54,12 @@
         {
             "name": "Execute custom SQL statement",
             "type": "action",
-            "content": ".ui.menu.actions.ExecuteSqlAction"
+            "content": ".actions.cli.ExecuteSqlAction"
         },
         {
             "name": "Quit program",
             "type": "action",
-            "content": ".ui.menu.actions.QuitAction"
+            "content": ".actions.cli.QuitAction"
         }
     ]
 }

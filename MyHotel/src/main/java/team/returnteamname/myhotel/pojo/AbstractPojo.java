@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 
 public abstract class AbstractPojo implements Serializable
 {
+    private boolean toStringPrintNullValues = true;
+
     public AbstractPojo()
     {}
 
@@ -29,10 +31,13 @@ public abstract class AbstractPojo implements Serializable
                     String fieldName   = methodName.substring(3);
                     Object returnValue = method.invoke(this, (Object[]) null);
 
-                    if (comma)
-                        stringBuilder.append(" | ");
-                    stringBuilder.append(fieldName).append(" = ").append(returnValue);
-                    comma = true;
+                    if (returnValue != null || toStringPrintNullValues)
+                    {
+                        if (comma)
+                            stringBuilder.append(" | ");
+                        stringBuilder.append(fieldName).append(" = ").append(returnValue);
+                        comma = true;
+                    }
                 }
             }
 
@@ -42,5 +47,10 @@ public abstract class AbstractPojo implements Serializable
         {
             return "<reflection error>";
         }
+    }
+
+    public void setToStringPrintNullValues(boolean toStringPrintNullValues)
+    {
+        this.toStringPrintNullValues = toStringPrintNullValues;
     }
 }

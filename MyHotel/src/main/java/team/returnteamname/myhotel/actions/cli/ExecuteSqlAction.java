@@ -1,11 +1,10 @@
-package team.returnteamname.myhotel.ui.menu.actions;
+package team.returnteamname.myhotel.actions.cli;
 
 import team.returnteamname.myhotel.dao.BaseDao;
 import team.returnteamname.myhotel.ui.IUserInterface;
 import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.util.Util;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.function.Supplier;
 
@@ -22,7 +21,7 @@ public class ExecuteSqlAction extends AbstractAction
             try
             {
                 if (query.toUpperCase().startsWith("SELECT"))
-                    printResultSet(userInterface, BaseDao.query(query));
+                    userInterface.eventCallback("print", Util.formatResultSet(BaseDao.query(query)));
                 else
                 {
                     int affectedRowsCount = BaseDao.update(query);
@@ -42,22 +41,5 @@ public class ExecuteSqlAction extends AbstractAction
         }).get());
 
         return null;
-    }
-
-    private void printResultSet(IUserInterface userInterface, ResultSet resultSet) throws SQLException
-    {
-        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
-        int               columnCount       = resultSetMetaData.getColumnCount();
-        while (resultSet.next())
-        {
-            for (int i = 1; i <= columnCount; ++i)
-            {
-                if (i > 1)
-                    userInterface.eventCallback("print", " | ");
-                userInterface
-                    .eventCallback("print", resultSetMetaData.getColumnName(i) + " " + resultSet.getString(i));
-            }
-            userInterface.eventCallback("printLine", "");
-        }
     }
 }

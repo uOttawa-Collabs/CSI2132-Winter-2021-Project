@@ -5,13 +5,13 @@ import org.jetbrains.annotations.Nullable;
 public class Employment extends AbstractPojo
 {
     private String hotelBrandName;
-    private String hotelName;
-    private String employeeId;
+    private String  hotelName;
+    private Integer employeeId;
 
     public Employment()
     {}
 
-    public Employment(@Nullable String hotelBrandName, @Nullable String hotelName, @Nullable String employeeId)
+    public Employment(@Nullable String hotelBrandName, @Nullable String hotelName, Integer employeeId)
     {
         this.hotelBrandName = hotelBrandName;
         this.hotelName      = hotelName;
@@ -40,13 +40,12 @@ public class Employment extends AbstractPojo
         this.hotelName = hotelName;
     }
 
-    @Nullable
-    public String getEmployeeId()
+    public Integer getEmployeeId()
     {
         return employeeId;
     }
 
-    public void setEmployeeId(@Nullable String employeeId)
+    public void setEmployeeId(Integer employeeId)
     {
         this.employeeId = employeeId;
     }

@@ -1,4 +1,4 @@
-package team.returnteamname.myhotel.ui.menu.actions;
+package team.returnteamname.myhotel.actions.cli;
 
 import org.postgresql.util.PGInterval;
 import team.returnteamname.myhotel.config.IConfigConstant;

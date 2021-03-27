@@ -1,5 +1,13 @@
 package team.returnteamname.myhotel.util;
 
+import team.returnteamname.myhotel.ui.IUserInterface;
+
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Map;
+import java.util.Set;
+
 public class Util
 {
     public static String camelCaseToUnderscoreLowerCase(String string)
@@ -53,5 +61,25 @@ public class Util
         if (!string.equals(target))
             throw new AssertionError(
                 "Assertion failed: \"" + string + "\", expected \"" + target + "\", message: " + extraMessage);
+    }
+
+    public static String formatResultSet(ResultSet resultSet) throws SQLException
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        int               columnCount       = resultSetMetaData.getColumnCount();
+
+        while (resultSet.next())
+        {
+            for (int i = 1; i <= columnCount; ++i)
+            {
+                if (i > 1)
+                    stringBuilder.append(" | ");
+                stringBuilder.append(resultSetMetaData.getColumnName(i)).append(" = ").append(resultSet.getString(i));
+            }
+            stringBuilder.append('\n');
+        }
+
+        return stringBuilder.toString();
     }
 }
