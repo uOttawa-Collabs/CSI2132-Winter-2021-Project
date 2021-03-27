@@ -32,6 +32,11 @@ public class BaseDao
         return ConnectionFactory.getInstance().getConnection().createStatement().executeUpdate(query);
     }
 
+    public static PreparedStatement prepare(@NotNull String query) throws SQLException
+    {
+        return ConnectionFactory.getInstance().getConnection().prepareStatement(query);
+    }
+
     public static ResultSet query(@NotNull PreparedStatement preparedStatement) throws SQLException
     {
         return preparedStatement.executeQuery();

@@ -1,12 +1,8 @@
 package team.returnteamname.myhotel.util;
 
-import team.returnteamname.myhotel.ui.IUserInterface;
-
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.Set;
 
 public class Util
 {
@@ -65,7 +61,7 @@ public class Util
 
     public static String formatResultSet(ResultSet resultSet) throws SQLException
     {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder     stringBuilder     = new StringBuilder();
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         int               columnCount       = resultSetMetaData.getColumnCount();
 

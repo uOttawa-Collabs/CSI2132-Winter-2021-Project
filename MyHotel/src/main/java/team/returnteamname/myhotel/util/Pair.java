@@ -1,6 +1,8 @@
 package team.returnteamname.myhotel.util;
 
-public class Pair<K, V>
+import java.io.Serializable;
+
+public class Pair<K, V> implements Serializable
 {
     private final K key;
     private final V value;

@@ -84,7 +84,7 @@ public class CommandLineUI implements IUserInterface
             int     childrenCount = currentMenu.getChildren().size();
             int     actionCount   = currentMenu.getActions().size();
 
-            printStream.println("Current location: " + currentMenu.getPath() + "\n");
+            printStream.println("Current location: " + currentMenu.getPath());
 
             int i = 0;
             if (!isRoot)
@@ -104,7 +104,7 @@ public class CommandLineUI implements IUserInterface
             }
 
             int choice;
-            printStream.println("\nPlease choose an operation: ");
+            printStream.print("Please choose an operation: ");
             for (; ; )
             {
                 try
@@ -117,7 +117,7 @@ public class CommandLineUI implements IUserInterface
                 }
                 catch (NumberFormatException e)
                 {
-                    printStream.println("Please enter a valid number. Try again: ");
+                    printStream.print("Please enter a valid number. Try again: ");
                 }
             }
 

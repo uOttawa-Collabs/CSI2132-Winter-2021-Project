@@ -16,6 +16,11 @@
                     "type": "menu",
                     "content": [
                         {
+                            "name": "View overall information about a hotel",
+                            "type": "action",
+                            "content": ".actions.cli.HotelInformationAction"
+                        },
+                        {
                             "name": "Register a hotel",
                             "type": "action",
                             "content": ".actions.cli.HotelRegistrationAction"
@@ -35,17 +40,6 @@
                             "name": "Withdraw an employee",
                             "type": "action",
                             "content": ".actions.cli.EmploymentWithdrawalAction"
-                        }
-                    ]
-                },
-                {
-                    "name": "Renting management",
-                    "type": "menu",
-                    "content": [
-                        {
-                            "name": "Extending a rent record",
-                            "type": "action",
-                            "content": ".actions.cli.RentExtensionAction"
                         }
                     ]
                 }

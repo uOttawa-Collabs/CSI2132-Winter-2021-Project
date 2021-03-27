@@ -32,17 +32,15 @@ CREATE TABLE hotel_brand
 
 CREATE TABLE hotel_brand_email_address
 (
-    hotel_brand_name VARCHAR(64),
+    hotel_brand_name VARCHAR(64) NOT NULL,
     email_address    VARCHAR(32) NOT NULL,
-    PRIMARY KEY (hotel_brand_name),
     FOREIGN KEY (hotel_brand_name) REFERENCES hotel_brand (hotel_brand_name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE hotel_brand_phone_number
 (
-    hotel_brand_name VARCHAR(64),
+    hotel_brand_name VARCHAR(64) NOT NULL,
     phone_number     VARCHAR(16) NOT NULL,
-    PRIMARY KEY (hotel_brand_name),
     FOREIGN KEY (hotel_brand_name) REFERENCES hotel_brand (hotel_brand_name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -65,10 +63,9 @@ CREATE TABLE hotel
 
 CREATE TABLE hotel_phone_number
 (
-    hotel_brand_name VARCHAR(64),
-    hotel_name       VARCHAR(64),
+    hotel_brand_name VARCHAR(64) NOT NULL,
+    hotel_name       VARCHAR(64) NOT NULL,
     phone_number     VARCHAR(16) NOT NULL,
-    PRIMARY KEY (hotel_brand_name, hotel_name),
     FOREIGN KEY (hotel_brand_name, hotel_name) REFERENCES hotel (hotel_brand_name, hotel_name) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -91,9 +88,9 @@ CREATE TABLE room
 
 CREATE TABLE room_amenity
 (
-    hotel_brand_name VARCHAR(64),
-    hotel_name       VARCHAR(64),
-    room_id          INT,
+    hotel_brand_name VARCHAR(64) NOT NULL,
+    hotel_name       VARCHAR(64) NOT NULL,
+    room_id          INT         NOT NULL,
     amenity          VARCHAR(32) NOT NULL,
     PRIMARY KEY (hotel_brand_name, hotel_name, room_id),
     FOREIGN KEY (hotel_brand_name, hotel_name, room_id) REFERENCES room (hotel_brand_name, hotel_name, room_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -101,19 +98,18 @@ CREATE TABLE room_amenity
 
 CREATE TABLE room_view
 (
-    hotel_brand_name VARCHAR(64),
-    hotel_name       VARCHAR(64),
-    room_id          INT,
+    hotel_brand_name VARCHAR(64) NOT NULL,
+    hotel_name       VARCHAR(64) NOT NULL,
+    room_id          INT         NOT NULL,
     view             VARCHAR(32) NOT NULL,
-    PRIMARY KEY (hotel_brand_name, hotel_name, room_id),
     FOREIGN KEY (hotel_brand_name, hotel_name, room_id) REFERENCES room (hotel_brand_name, hotel_name, room_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE room_extensibility
 (
-    hotel_brand_name VARCHAR(64),
-    hotel_name       VARCHAR(64),
-    room_id          INT,
+    hotel_brand_name VARCHAR(64) NOT NULL,
+    hotel_name       VARCHAR(64) NOT NULL,
+    room_id          INT         NOT NULL,
     extensibility    VARCHAR(32) NOT NULL,
     PRIMARY KEY (hotel_brand_name, hotel_name, room_id),
     FOREIGN KEY (hotel_brand_name, hotel_name, room_id) REFERENCES room (hotel_brand_name, hotel_name, room_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -183,10 +179,13 @@ CREATE TABLE employment
 );
 
 -- Administrator
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO xwang532;
+GRANT ALL PRIVILEGES ON ALL
+TABLES IN SCHEMA PUBLIC TO xwang532;
 
 -- All employees connected to the database uses this account
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO fzhan081;
+GRANT ALL PRIVILEGES ON ALL
+TABLES IN SCHEMA PUBLIC TO fzhan081;
 
 -- All customers connected to the database uses this account
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA PUBLIC TO jguo108;
+GRANT ALL PRIVILEGES ON ALL
+TABLES IN SCHEMA PUBLIC TO jguo108;
