@@ -2,6 +2,7 @@ package team.returnteamname.myhotel.connection;
 
 import team.returnteamname.myhotel.config.Config;
 import team.returnteamname.myhotel.config.ConfigManager;
+import team.returnteamname.myhotel.config.IConfigConstant;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,7 +52,8 @@ public class ConnectionFactory
             config = ConfigManager.getInstance().getConfig();
 
             Class.forName(config.getDriver());
-            String url = "jdbc:" + config.getDbms() + "://" + config.getServerAddress() + "/" + config.getDatabase();
+            String url = "jdbc:" + config.getDbms() + "://" + config.getServerAddress() + "/" + config
+                .getDatabase() + "?ApplicationName=" + IConfigConstant.ROOT_PACKAGE_NAME;
             connection = DriverManager.getConnection(url, config.getUsername(), config.getPassword());
             return connection;
         }
