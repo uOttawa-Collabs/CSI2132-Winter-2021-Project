@@ -4,10 +4,7 @@ package team.returnteamname.myhotelcustomer.config;
 
 public interface IConfigConstant
 {
-    java.lang.String   ROOT_PACKAGE_NAME = "team.returnteamname.myhotelcustomer";
-    java.lang.String   CONFIG_FILE_PATH  = "http://127.0.0.1:2132/config.json";
-    java.lang.String[] POJO_LIST         = { "Book", "Customer", "Employee", "Employment", "Hotel", "HotelBrand",
-                                             "HotelBrandEmailAddress", "HotelBrandPhoneNumber", "HotelPhoneNumber",
-                                             "Rent", "RentHistory", "Room", "RoomAmenity", "RoomExtensibility",
-                                             "RoomView" };
+    java.lang.String ROOT_PACKAGE_NAME = "team.returnteamname.myhotelcustomer";
+    java.lang.String CONFIG_FILE_PATH = "http://127.0.0.1:2132/config.json";
+    java.lang.String[] POJO_LIST = { "Book", "Customer", "Employee", "Employment", "Hotel", "HotelBrand", "HotelBrandEmailAddress", "HotelBrandPhoneNumber", "HotelPhoneNumber", "Rent", "RentHistory", "Room", "RoomAmenity", "RoomExtensibility", "RoomView" };
 }
