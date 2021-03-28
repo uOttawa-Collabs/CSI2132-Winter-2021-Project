@@ -178,6 +178,33 @@ CREATE TABLE employment
     FOREIGN KEY (employee_id) REFERENCES employee (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE FUNCTION update_hotel_number_of_rooms()
+    RETURNS TRIGGER AS
+    $body$
+        DECLARE
+            room_count INT;
+            hotel_identifier RECORD;
+        BEGIN
+            FOR hotel_identifier IN (SELECT hotel_brand_name, hotel_name FROM hotel)
+                LOOP
+                    SELECT COUNT(room_id)
+                        FROM room
+                        WHERE hotel_brand_name = hotel_identifier.hotel_brand_name AND hotel_name = hotel_identifier.hotel_name
+                        INTO room_count;
+                    UPDATE hotel
+                        SET number_of_rooms = room_count
+                        WHERE hotel_brand_name = hotel_identifier.hotel_brand_name AND hotel_name = hotel_identifier.hotel_name;
+                END LOOP;
+            RETURN NEW;
+        END;
+    $body$
+    LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_update_hotel_number_of_rooms AFTER INSERT OR UPDATE OR DELETE ON room
+    FOR EACH ROW
+    EXECUTE FUNCTION update_hotel_number_of_rooms();
+
+
 -- Administrator
 GRANT ALL PRIVILEGES ON ALL
 TABLES IN SCHEMA PUBLIC TO xwang532;

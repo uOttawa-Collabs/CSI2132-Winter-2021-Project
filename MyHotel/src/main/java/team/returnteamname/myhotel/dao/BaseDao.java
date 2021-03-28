@@ -106,8 +106,8 @@ public class BaseDao
 
             sql = sql
                 .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
-                .replace("<attributeList>", attributeNameBuilder.toString())
-                .replace("<valuePlaceholderList>", valuePlaceholderBuilder.toString());
+                .replace("<attributeList>", attributeNameBuilder)
+                .replace("<valuePlaceholderList>", valuePlaceholderBuilder);
 
             Connection        connection = ConnectionFactory.getInstance().getConnection();
             PreparedStatement statement  = connection.prepareStatement(sql);
@@ -154,7 +154,7 @@ public class BaseDao
 
             sql = sql
                 .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
-                .replace("<conditionList>", conditionBuilder.toString());
+                .replace("<conditionList>", conditionBuilder);
 
             Connection        connection = ConnectionFactory.getInstance().getConnection();
             PreparedStatement statement  = connection.prepareStatement(sql);
@@ -201,7 +201,7 @@ public class BaseDao
 
             sql = sql
                 .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
-                .replace("<conditionList>", conditionBuilder.toString());
+                .replace("<conditionList>", conditionBuilder);
 
             Connection        connection = ConnectionFactory.getInstance().getConnection();
             PreparedStatement statement  = connection.prepareStatement(sql);
@@ -288,8 +288,8 @@ public class BaseDao
 
             sql = sql
                 .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
-                .replace("<newValueList>", newValueBuilder.toString())
-                .replace("<conditionList>", conditionBuilder.toString());
+                .replace("<newValueList>", newValueBuilder)
+                .replace("<conditionList>", conditionBuilder);
 
             Connection        connection = ConnectionFactory.getInstance().getConnection();
             PreparedStatement statement  = connection.prepareStatement(sql);
