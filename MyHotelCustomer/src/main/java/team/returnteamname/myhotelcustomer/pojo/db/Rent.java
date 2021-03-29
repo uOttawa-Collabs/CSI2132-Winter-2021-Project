@@ -1,25 +1,32 @@
-package team.returnteamname.myhotelcustomer.pojo;
+package team.returnteamname.myhotelcustomer.pojo.db;
 
 import org.jetbrains.annotations.Nullable;
+import org.postgresql.util.PGInterval;
+import team.returnteamname.myhotelcustomer.pojo.AbstractPojo;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
-public class Book extends AbstractPojo
+public class Rent extends AbstractPojo
 {
-    private Integer customerId;
-    private String  hotelBrandName;
-    private String  hotelName;
-    private Integer roomId;
-    private Date    checkInDate;
-    private String  roomType;
-    private Integer totalNumberOccupants;
+    private Integer    customerId;
+    private String     hotelBrandName;
+    private String     hotelName;
+    private Integer    roomId;
+    private Date       checkInDate;
+    private String     roomType;
+    private Integer    totalNumberOccupants;
+    private Integer    checkInEmployeeId;
+    private BigDecimal billAmount;
+    private PGInterval duration;
 
-    public Book()
+    public Rent()
     {}
 
-    public Book(@Nullable Integer customerId, @Nullable String hotelBrandName, @Nullable String hotelName,
+    public Rent(@Nullable Integer customerId, @Nullable String hotelBrandName, @Nullable String hotelName,
                 @Nullable Integer roomId, @Nullable Date checkInDate,
-                @Nullable String roomType, @Nullable Integer totalNumberOccupants)
+                @Nullable String roomType, @Nullable Integer totalNumberOccupants, @Nullable Integer checkInEmployeeId,
+                @Nullable BigDecimal billAmount, @Nullable PGInterval duration)
     {
         this.customerId           = customerId;
         this.hotelBrandName       = hotelBrandName;
@@ -28,6 +35,9 @@ public class Book extends AbstractPojo
         this.checkInDate          = checkInDate;
         this.roomType             = roomType;
         this.totalNumberOccupants = totalNumberOccupants;
+        this.checkInEmployeeId    = checkInEmployeeId;
+        this.billAmount           = billAmount;
+        this.duration             = duration;
     }
 
     @Nullable
@@ -105,5 +115,38 @@ public class Book extends AbstractPojo
     public void setTotalNumberOccupants(@Nullable Integer totalNumberOccupants)
     {
         this.totalNumberOccupants = totalNumberOccupants;
+    }
+
+    @Nullable
+    public Integer getCheckInEmployeeId()
+    {
+        return checkInEmployeeId;
+    }
+
+    public void setCheckInEmployeeId(@Nullable Integer checkInEmployeeId)
+    {
+        this.checkInEmployeeId = checkInEmployeeId;
+    }
+
+    @Nullable
+    public BigDecimal getBillAmount()
+    {
+        return billAmount;
+    }
+
+    public void setBillAmount(@Nullable BigDecimal billAmount)
+    {
+        this.billAmount = billAmount;
+    }
+
+    @Nullable
+    public PGInterval getDuration()
+    {
+        return duration;
+    }
+
+    public void setDuration(@Nullable PGInterval duration)
+    {
+        this.duration = duration;
     }
 }

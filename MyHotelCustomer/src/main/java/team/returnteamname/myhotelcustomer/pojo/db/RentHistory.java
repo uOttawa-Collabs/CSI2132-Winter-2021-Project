@@ -1,7 +1,8 @@
-package team.returnteamname.myhotelcustomer.pojo;
+package team.returnteamname.myhotelcustomer.pojo.db;
 
 import org.jetbrains.annotations.Nullable;
 import org.postgresql.util.PGInterval;
+import team.returnteamname.myhotelcustomer.pojo.AbstractPojo;
 
 import java.math.BigDecimal;
 import java.sql.Date;

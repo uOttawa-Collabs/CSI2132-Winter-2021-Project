@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 
 public abstract class AbstractPojo implements Serializable
 {
-    private boolean toStringPrintNullValues = true;
+    transient private boolean toStringPrintNullValues = true;
 
     public AbstractPojo()
     {}

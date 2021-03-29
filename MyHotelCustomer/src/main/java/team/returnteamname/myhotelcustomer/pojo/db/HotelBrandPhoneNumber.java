@@ -1,6 +1,7 @@
-package team.returnteamname.myhotelcustomer.pojo;
+package team.returnteamname.myhotelcustomer.pojo.db;
 
 import org.jetbrains.annotations.Nullable;
+import team.returnteamname.myhotelcustomer.pojo.AbstractPojo;
 
 public class HotelBrandPhoneNumber extends AbstractPojo
 {
