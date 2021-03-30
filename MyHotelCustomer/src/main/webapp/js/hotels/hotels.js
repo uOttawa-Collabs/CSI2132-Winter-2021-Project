@@ -99,7 +99,7 @@ function getHotelJsonList(alertBox, callback)
             dataType   : "json",
             data       : JSON.stringify(
                 {
-                    "query": "hotel",
+                    "query"  : "hotel",
                     "content": null
                 }),
             success(data, textStatus)

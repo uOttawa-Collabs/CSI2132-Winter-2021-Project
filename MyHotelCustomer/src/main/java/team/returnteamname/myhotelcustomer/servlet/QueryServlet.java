@@ -9,6 +9,7 @@ import team.returnteamname.myhotelcustomer.pojo.db.Rent;
 import team.returnteamname.myhotelcustomer.pojo.servlet.HotelListResponsePojo;
 import team.returnteamname.myhotelcustomer.pojo.servlet.RoomListResponsePojo;
 import team.returnteamname.myhotelcustomer.util.Pair;
+import team.returnteamname.myhotelcustomer.util.Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class QueryServlet extends AbstractPostOnlyServlet
 {
@@ -42,10 +44,12 @@ public class QueryServlet extends AbstractPostOnlyServlet
             }
 
             Object loggedInAs = request.getSession().getAttribute("loggedInAs");
+            String requestBody = getRequestBody(request);
+
             // TODO: May verify database here
             if (loggedInAs != null)
             {
-                switch (getRequestType(request))
+                switch (getRequestType(requestBody))
                 {
                     case "hotel":
                     {
@@ -58,7 +62,7 @@ public class QueryServlet extends AbstractPostOnlyServlet
                     }
                     case "room":
                     {
-                        Pair<String, String> identifier = getHotelIdentifierFromRequest(request);
+                        Pair<String, String> identifier = getHotelIdentifierFromRequest(requestBody);
                         if (identifier == null || identifier.getKey() == null || identifier.getValue() == null)
                             reject(response, "400", "Bad request");
                         else
@@ -86,11 +90,16 @@ public class QueryServlet extends AbstractPostOnlyServlet
         }
     }
 
-    private String getRequestType(HttpServletRequest request)
+    private String getRequestBody(HttpServletRequest request) throws IOException
+    {
+        return request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    private String getRequestType(String requestBody)
     {
         try
         {
-            Map<?, ?> map = new Gson().fromJson(request.getReader(), Map.class);
+            Map<?, ?> map = new Gson().fromJson(requestBody, Map.class);
             return (String) map.get("query");
         }
         catch (Exception e)
@@ -100,9 +109,22 @@ public class QueryServlet extends AbstractPostOnlyServlet
         }
     }
 
-    private Pair<String, String> getHotelIdentifierFromRequest(HttpServletRequest request)
+    private Pair<String, String> getHotelIdentifierFromRequest(String requestBody)
     {
-        return null;
+        try
+        {
+            Map<?, ?> map = new Gson().fromJson(requestBody, Map.class);
+
+            Object content = map.get("content");
+            assert content instanceof Map;
+            Map<?, ?> contentMap = (Map<?, ?>) content;
+
+            return new Pair<>((String) contentMap.get("brandName"), (String) contentMap.get("hotelName"));
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     private HotelListResponsePojo processHotelQuery()

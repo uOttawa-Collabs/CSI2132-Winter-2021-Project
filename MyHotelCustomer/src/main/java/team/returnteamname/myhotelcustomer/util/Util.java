@@ -1,8 +1,11 @@
 package team.returnteamname.myhotelcustomer.util;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.*;
 
 public class Util
 {
@@ -79,5 +82,30 @@ public class Util
         return stringBuilder.toString();
     }
 
+    public static Map<String, List<String>> parseQueryString(String queryString)
+    {
+        Map<String, List<String>> map = new HashMap<>();
 
+        String[] parameters = queryString.split("&");
+        for (String pair : parameters)
+        {
+            pair = pair.strip();
+            if (!pair.isBlank())
+            {
+                int index = pair.indexOf("=");
+                String key = index > 0
+                             ? URLDecoder.decode(pair.substring(0, index), StandardCharsets.UTF_8)
+                             : pair;
+                String value = (index > 0 && pair.length() - index > 1)
+                               ? URLDecoder.decode(pair.substring(index + 1), StandardCharsets.UTF_8)
+                               : null;
+
+                if (map.containsKey(key))
+                    map.put(key, new ArrayList<>());
+                map.get(key).add(value);
+            }
+        }
+
+        return map;
+    }
 }
