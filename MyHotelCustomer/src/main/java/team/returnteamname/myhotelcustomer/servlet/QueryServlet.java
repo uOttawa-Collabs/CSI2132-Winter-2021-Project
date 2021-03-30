@@ -12,6 +12,7 @@ import team.returnteamname.myhotelcustomer.util.container.Pair;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -188,8 +189,137 @@ public class QueryServlet extends AbstractPostOnlyServlet
         return hotelListResponse;
     }
 
-    private RoomListResponsePojo processRoomQuery(Pair<String, String> hotelIdentifier)
+    private RoomListResponsePojo processRoomQuery(Pair<String, String> hotelIdentifier) throws SQLException
     {
-        return null;
+        String hotelBrandName = hotelIdentifier.getKey();
+        String hotelName      = hotelIdentifier.getValue();
+
+        RoomListResponsePojo      roomListResponse = new RoomListResponsePojo();
+        RoomListResponsePojo.Data roomListData;
+
+        List<Integer> availableRoomId  = new ArrayList<>();
+        List<Integer> bookedRoomId     = new ArrayList<>();
+        List<Integer> rentRoomId       = new ArrayList<>();
+
+        String roomQuery = "SELECT room_id FROM room WHERE hotel_brand_name = '" + hotelBrandName
+                            + "' AND hotel_name = '" + hotelName + "'";
+        String bookQuery = "SELECT room_id FROM book WHERE hotel_brand_name = '" + hotelBrandName
+                            + "' AND hotel_name = '" + hotelName + "'";
+        String rentQuery = "SELECT room_id FROM rent WHERE hotel_brand_name = '" + hotelBrandName
+                            + "' AND hotel_name = '" + hotelName + "'";
+
+        ResultSet rsRoom = BaseDao.query(roomQuery);
+        ResultSet rsBook = BaseDao.query(bookQuery);
+        ResultSet rsRent = BaseDao.query(rentQuery);
+
+        while(rsRoom.next())
+        {
+            Integer roomId = rsRoom.getInt("room_id");
+            availableRoomId.add(roomId);
+        }
+
+        while(rsBook.next())
+        {
+            Integer roomId = rsBook.getInt("room_id");
+            bookedRoomId.add(roomId);
+        }
+
+        while(rsRent.next())
+        {
+            Integer roomId = rsRent.getInt("room_id");
+            rentRoomId.add(roomId);
+        }
+
+        for(Integer eachRoomId: availableRoomId)
+        {
+            for(Integer eachBookedRoomId: bookedRoomId)
+            {
+                if(eachRoomId.equals(eachBookedRoomId))
+                {
+                    availableRoomId.remove(eachRoomId);
+                }
+            }
+        }
+
+        for(Integer eachRoomId: availableRoomId)
+        {
+            for(Integer eachRentRoomId: rentRoomId)
+            {
+                if(eachRoomId.equals(eachRentRoomId))
+                {
+                    availableRoomId.remove(eachRoomId);
+                }
+            }
+        }
+
+        for(Integer eachAvailableRoomId: availableRoomId)
+        {
+            String availableRoom     = "SELECT * FROM room WHERE hotel_brand_name = '" + hotelBrandName
+                                        + "' AND hotel_name = '" + hotelName + "' AND room_id = '"
+                                        + eachAvailableRoomId + "'";
+            String roomAmenity       = "SELECT amenity FROM room_amenity WHERE hotel_brand_name = '" + hotelBrandName
+                                        + "' AND hotel_name = '" + hotelName + "' AND room_id = '"
+                                        + eachAvailableRoomId + "'";
+            String roomExtensibility = "SELECT extensibility FROM room_extensibility WHERE hotel_brand_name = '" + hotelBrandName
+                                        + "' AND hotel_name = '" + hotelName + "' AND room_id = '"
+                                        + eachAvailableRoomId + "'";
+            String roomView          = "SELECT view FROM room_view WHERE hotel_brand_name = '" + hotelBrandName
+                                        + "' AND hotel_name = '" + hotelName + "' AND room_id = '"
+                                        + eachAvailableRoomId + "'";
+            String roomType          = "SELECT room_type FROM book WHERE hotel_brand_name = '" + hotelBrandName
+                                        + "' AND hotel_name = '" + hotelName + "' AND room_id = '"
+                                        + eachAvailableRoomId + "'";
+
+            ResultSet rsAvailableRoom     = BaseDao.query(availableRoom);
+            ResultSet rsRoomAmenity       = BaseDao.query(roomAmenity);
+            ResultSet rsRoomExtensibility = BaseDao.query(roomExtensibility);
+            ResultSet rsRoomView          = BaseDao.query(roomView);
+            ResultSet rsRoomType          = BaseDao.query(roomType);
+
+            String roomId   = String.valueOf(eachAvailableRoomId);
+            String price    = "";
+            String type     = "";
+            String capacity ="";
+
+            List<String> amenityList       = new LinkedList<>();
+            List<String> extensibilityList = new LinkedList<>();
+            List<String> viewList          = new LinkedList<>();
+
+            while(rsAvailableRoom.next())
+            {
+                BigDecimal roomPrice = rsAvailableRoom.getBigDecimal("price");
+                price = roomPrice.toString();
+                capacity = rsAvailableRoom.getString("room_capacity");
+            }
+
+            while(rsRoomAmenity.next())
+            {
+                String eachRoomAmenity = rsRoomAmenity.getString("amenity");
+                amenityList.add(eachRoomAmenity);
+            }
+
+            while(rsRoomExtensibility.next())
+            {
+                String eachRoomExtensibility = rsRoomExtensibility.getString("extensibility");
+                extensibilityList.add(eachRoomExtensibility);
+            }
+
+            while(rsRoomView.next())
+            {
+                String eachRoomView = rsRoomView.getString("view");
+                viewList.add(eachRoomView);
+            }
+
+            while(rsRoomType.next())
+            {
+                type = rsRoomType.getString("room_type");
+            }
+
+            roomListData = new RoomListResponsePojo.Data(roomId, price, type, capacity, amenityList, extensibilityList, viewList);
+
+            roomListResponse.getData().add(roomListData);
+        }
+
+        return roomListResponse;
     }
 }
