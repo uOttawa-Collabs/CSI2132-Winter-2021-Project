@@ -20,7 +20,7 @@ function addColumn(json, index, tbody)
     s += "</td>";
 
     s += "<td>";
-    s += json["phoneNumber"];
+    s += json["phoneNumber"].toString().replaceAll(',', '<br>');
     s += "</td>";
 
     s += "<td>";

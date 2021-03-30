@@ -36,76 +36,50 @@ public class LoginServlet extends AbstractPostOnlyServlet
             Gson gson = new Gson();
             BufferedReader bufferedReader = request.getReader();
 
-            try
-            {
-                BaseDao baseDao = new BaseDao();
-                AuthenticationPojo authenticationPojo = gson.fromJson(bufferedReader, AuthenticationPojo.class);
+            BaseDao baseDao = new BaseDao();
+            AuthenticationPojo authenticationPojo = gson.fromJson(bufferedReader, AuthenticationPojo.class);
 
-                Customer customer = new Customer();
-                customer.setFullName(authenticationPojo.getUsername());
-                ArrayList<AbstractPojo> arrayList = baseDao.select(customer).getKey();
+            Customer customer = new Customer();
+            customer.setFullName(authenticationPojo.getUsername());
+            ArrayList<AbstractPojo> arrayList = baseDao.select(customer).getKey();
+            if (arrayList.size() == 1)
+            {
+                customer = (Customer) arrayList.get(0);
+                accept(request, response, customer.getId());
+            }
+            else
+            {
+                try
+                {
+                    customer.setFullName(null);
+                    customer.setId(Integer.parseInt(authenticationPojo.getUsername()));
+                }
+                catch (NumberFormatException e)
+                {
+                    reject(response, "403", "Username does not match any record");
+                    return;
+                }
+
+                arrayList = baseDao.select(customer).getKey();
                 if (arrayList.size() == 1)
-                {
-                    customer = (Customer) arrayList.get(0);
                     accept(request, response, customer.getId());
-                }
                 else
-                {
-                    try
-                    {
-                        customer.setFullName(null);
-                        customer.setId(Integer.parseInt(authenticationPojo.getUsername()));
-                    }
-                    catch (NumberFormatException e)
-                    {
-                        reject(response);
-                        return;
-                    }
+                    reject(response, "403", "UID does not match any record");
+            }
 
-                    arrayList = baseDao.select(customer).getKey();
-                    if (arrayList.size() == 1)
-                        accept(request, response, customer.getId());
-                    else
-                        reject(response);
-                }
-            }
-            catch (Exception e)
-            {
-                onUnhandledException(response, e);
-            }
         }
-        catch (IOException e)
+        catch (Exception e)
         {
+            onUnhandledException(response, e);
             e.printStackTrace();
         }
     }
 
     private void accept(HttpServletRequest request, HttpServletResponse response, Integer id) throws IOException
     {
-        Gson gson = new Gson();
+        request.getSession().setAttribute("loggedInAs", id);
+        request.getSession().setMaxInactiveInterval(30 * 60);
 
-        response.setStatus(200);
-        response.setContentType("application/json; charset=utf-8");
-
-        ResponsePojo responsePojo = new ResponsePojo();
-        responsePojo.setCode("0");
-        responsePojo.setMessage("Success");
-
-        // TODO: Set session
-        //request.getSession().setAttribute();
-    }
-
-    private void reject(HttpServletResponse response) throws IOException
-    {
-        Gson gson = new Gson();
-
-        response.setStatus(200);
-        response.setContentType("application/json; charset=utf-8");
-
-        ResponsePojo responsePojo = new ResponsePojo();
-        responsePojo.setCode("403");
-        responsePojo.setMessage("Username or UID does not match any record");
-
-        response.getWriter().write(gson.toJson(responsePojo));
+        super.accept(response, null);
     }
 }

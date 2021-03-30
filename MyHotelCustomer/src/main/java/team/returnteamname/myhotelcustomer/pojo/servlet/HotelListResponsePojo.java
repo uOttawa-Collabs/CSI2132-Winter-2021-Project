@@ -31,18 +31,18 @@ public class HotelListResponsePojo extends ResponsePojo
 
     public static class Data implements Serializable
     {
-        private String brandName;
-        private String hotelName;
-        private String starCategory;
-        private String address;
-        private String phoneNumber;
-        private String roomsAvailable;
+        private String       brandName;
+        private String       hotelName;
+        private String       starCategory;
+        private String       address;
+        private List<String> phoneNumber;
+        private String       roomsAvailable;
 
         public Data()
         {}
 
-        public Data(String brandName, String hotelName, String starCategory, String address, String phoneNumber,
-                    String roomsAvailable)
+        public Data(String brandName, String hotelName, String starCategory, String address,
+                    List<String> phoneNumber, String roomsAvailable)
         {
             this.brandName      = brandName;
             this.hotelName      = hotelName;
@@ -92,12 +92,12 @@ public class HotelListResponsePojo extends ResponsePojo
             this.address = address;
         }
 
-        public String getPhoneNumber()
+        public List<String> getPhoneNumber()
         {
             return phoneNumber;
         }
 
-        public void setPhoneNumber(String phoneNumber)
+        public void setPhoneNumber(List<String> phoneNumber)
         {
             this.phoneNumber = phoneNumber;
         }
