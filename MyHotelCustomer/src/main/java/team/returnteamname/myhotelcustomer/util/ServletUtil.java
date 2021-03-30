@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import team.returnteamname.myhotelcustomer.util.container.Pair;
 import team.returnteamname.myhotelcustomer.util.container.Triplet;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 import java.util.stream.Collectors;

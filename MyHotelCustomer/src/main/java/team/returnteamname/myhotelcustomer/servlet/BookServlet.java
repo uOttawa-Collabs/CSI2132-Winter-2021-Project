@@ -5,8 +5,8 @@ import team.returnteamname.myhotelcustomer.pojo.db.Book;
 import team.returnteamname.myhotelcustomer.util.ServletUtil;
 import team.returnteamname.myhotelcustomer.util.container.Triplet;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.sql.SQLException;
 

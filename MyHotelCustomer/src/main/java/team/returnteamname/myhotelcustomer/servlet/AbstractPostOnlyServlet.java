@@ -1,11 +1,11 @@
 package team.returnteamname.myhotelcustomer.servlet;
 
 import com.google.gson.Gson;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import team.returnteamname.myhotelcustomer.pojo.servlet.ResponsePojo;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 

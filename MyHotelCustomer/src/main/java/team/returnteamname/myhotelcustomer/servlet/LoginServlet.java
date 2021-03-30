@@ -5,10 +5,9 @@ import team.returnteamname.myhotelcustomer.dao.BaseDao;
 import team.returnteamname.myhotelcustomer.pojo.AbstractPojo;
 import team.returnteamname.myhotelcustomer.pojo.db.Customer;
 import team.returnteamname.myhotelcustomer.pojo.servlet.AuthenticationPojo;
-import team.returnteamname.myhotelcustomer.pojo.servlet.ResponsePojo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
