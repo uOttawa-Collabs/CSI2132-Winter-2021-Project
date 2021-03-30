@@ -86,7 +86,7 @@ public class QueryServlet extends AbstractPostOnlyServlet
         }
     }
 
-    public String getRequestType(HttpServletRequest request)
+    private String getRequestType(HttpServletRequest request)
     {
         try
         {
@@ -100,12 +100,12 @@ public class QueryServlet extends AbstractPostOnlyServlet
         }
     }
 
-    public Pair<String, String> getHotelIdentifierFromRequest(HttpServletRequest request)
+    private Pair<String, String> getHotelIdentifierFromRequest(HttpServletRequest request)
     {
         return null;
     }
 
-    public HotelListResponsePojo processHotelQuery()
+    private HotelListResponsePojo processHotelQuery()
         throws SQLException
     {
         HotelListResponsePojo      hotelListResponse = new HotelListResponsePojo();
@@ -208,7 +208,7 @@ public class QueryServlet extends AbstractPostOnlyServlet
         return hotelListResponse;
     }
 
-    public RoomListResponsePojo processRoomQuery(Pair<String, String> hotelIdentifier)
+    private RoomListResponsePojo processRoomQuery(Pair<String, String> hotelIdentifier)
     {
         return null;
     }
