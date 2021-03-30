@@ -1,4 +1,4 @@
-package team.returnteamname.myhotelcustomer.util;
+package team.returnteamname.myhotelcustomer.util.container;
 
 public class Triplet<K, V, W> extends Pair<K, V>
 {

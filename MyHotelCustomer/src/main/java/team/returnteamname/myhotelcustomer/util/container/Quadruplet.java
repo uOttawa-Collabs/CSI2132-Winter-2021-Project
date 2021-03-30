@@ -1,4 +1,4 @@
-package team.returnteamname.myhotelcustomer.util;
+package team.returnteamname.myhotelcustomer.util.container;
 
 public class Quadruplet<K, U, V, W> extends Triplet<K, U, V>
 {

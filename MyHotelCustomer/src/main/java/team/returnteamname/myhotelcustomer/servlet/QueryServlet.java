@@ -1,6 +1,5 @@
 package team.returnteamname.myhotelcustomer.servlet;
 
-import com.google.gson.Gson;
 import org.postgresql.util.PGInterval;
 import team.returnteamname.myhotelcustomer.dao.BaseDao;
 import team.returnteamname.myhotelcustomer.pojo.db.Book;
@@ -8,20 +7,16 @@ import team.returnteamname.myhotelcustomer.pojo.db.HotelPhoneNumber;
 import team.returnteamname.myhotelcustomer.pojo.db.Rent;
 import team.returnteamname.myhotelcustomer.pojo.servlet.HotelListResponsePojo;
 import team.returnteamname.myhotelcustomer.pojo.servlet.RoomListResponsePojo;
-import team.returnteamname.myhotelcustomer.util.Pair;
-import team.returnteamname.myhotelcustomer.util.Util;
+import team.returnteamname.myhotelcustomer.util.ServletUtil;
+import team.returnteamname.myhotelcustomer.util.container.Pair;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class QueryServlet extends AbstractPostOnlyServlet
 {
@@ -43,13 +38,13 @@ public class QueryServlet extends AbstractPostOnlyServlet
                 return;
             }
 
-            Object loggedInAs = request.getSession().getAttribute("loggedInAs");
-            String requestBody = getRequestBody(request);
+            Object loggedInAs  = request.getSession().getAttribute("loggedInAs");
+            String requestBody = ServletUtil.getRequestBody(request);
 
             // TODO: May verify database here
             if (loggedInAs != null)
             {
-                switch (getRequestType(requestBody))
+                switch (ServletUtil.getRequestType(requestBody))
                 {
                     case "hotel":
                     {
@@ -62,7 +57,7 @@ public class QueryServlet extends AbstractPostOnlyServlet
                     }
                     case "room":
                     {
-                        Pair<String, String> identifier = getHotelIdentifierFromRequest(requestBody);
+                        Pair<String, String> identifier = ServletUtil.getHotelIdentifierFromRequest(requestBody);
                         if (identifier == null || identifier.getKey() == null || identifier.getValue() == null)
                             reject(response, "400", "Bad request");
                         else
@@ -87,43 +82,6 @@ public class QueryServlet extends AbstractPostOnlyServlet
         {
             onUnhandledException(response, e);
             e.printStackTrace();
-        }
-    }
-
-    private String getRequestBody(HttpServletRequest request) throws IOException
-    {
-        return request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-    }
-
-    private String getRequestType(String requestBody)
-    {
-        try
-        {
-            Map<?, ?> map = new Gson().fromJson(requestBody, Map.class);
-            return (String) map.get("query");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
-    private Pair<String, String> getHotelIdentifierFromRequest(String requestBody)
-    {
-        try
-        {
-            Map<?, ?> map = new Gson().fromJson(requestBody, Map.class);
-
-            Object content = map.get("content");
-            assert content instanceof Map;
-            Map<?, ?> contentMap = (Map<?, ?>) content;
-
-            return new Pair<>((String) contentMap.get("brandName"), (String) contentMap.get("hotelName"));
-        }
-        catch (Exception e)
-        {
-            return null;
         }
     }
 
@@ -179,13 +137,13 @@ public class QueryServlet extends AbstractPostOnlyServlet
 
         while (rsHotel.next())
         {
-            String hotelBrandName = rsHotel.getString("hotel_brand_name");
-            String hotelName      = rsHotel.getString("hotel_name");
-            String starCategory   = String.valueOf(rsHotel.getInt("star_category"));
-            String address        = rsHotel.getString("address");
-            int    numOfRooms     = rsHotel.getInt("number_of_rooms");
-            List<String> phoneNumbers    = new LinkedList<>();
-            String roomsAvailable;
+            String       hotelBrandName = rsHotel.getString("hotel_brand_name");
+            String       hotelName      = rsHotel.getString("hotel_name");
+            String       starCategory   = String.valueOf(rsHotel.getInt("star_category"));
+            String       address        = rsHotel.getString("address");
+            int          numOfRooms     = rsHotel.getInt("number_of_rooms");
+            List<String> phoneNumbers   = new LinkedList<>();
+            String       roomsAvailable;
 
             for (HotelPhoneNumber eachHotel : phoneNumberList)
             {

@@ -1,8 +1,10 @@
-function bookingSuccess(alertBox) {
+function bookingSuccess(alertBox)
+{
     showSuccessAlert(alertBox, "Booking success");
 }
 
-function addColumn(json, index, tbody) {
+function addColumn(json, index, tbody)
+{
     let s = ""
     s += "<tr>";
 
@@ -42,7 +44,8 @@ function addColumn(json, index, tbody) {
     tbody.append(s);
 }
 
-function generateButtonCallback(brandName, hotelName, id, alertBox) {
+function generateButtonCallback(brandName, hotelName, id, alertBox)
+{
     const apiAddress = "BookServlet";
     return () =>
     {
@@ -60,8 +63,10 @@ function generateButtonCallback(brandName, hotelName, id, alertBox) {
                         "hotelName": hotelName,
                         "id"       : id
                     }),
-                success(data, textStatus) {
-                    switch (data["code"]) {
+                success(data, textStatus)
+                {
+                    switch (data["code"])
+                    {
                         case "0":
                             bookingSuccess(alertBox);
                             break;
@@ -70,7 +75,8 @@ function generateButtonCallback(brandName, hotelName, id, alertBox) {
                             break;
                     }
                 },
-                error(jqXHR, textStatus, errorThrown) {
+                error(jqXHR, textStatus, errorThrown)
+                {
                     ajaxErrorHandler(jqXHR, textStatus, errorThrown, null, alertBox);
                 }
             }
@@ -78,26 +84,33 @@ function generateButtonCallback(brandName, hotelName, id, alertBox) {
     };
 }
 
-function parseRoomListJson(hotelBrand, hotelName, array, tbody, alertBox) {
+function parseRoomListJson(hotelBrand, hotelName, array, tbody, alertBox)
+{
     "use strict";
-    try {
+    try
+    {
         array.forEach(
             (value, index) =>
             {
                 addColumn(value, index, tbody);
             });
-        for (let i = 0; i < array.length; ++i) {
+        for (let i = 0; i < array.length; ++i)
+        {
             let button = $("button#button-" + i);
-            if (button !== undefined) {
+            if (button !== undefined)
+            {
                 button.click(generateButtonCallback(hotelBrand, hotelName, array[i]["id"]), alertBox);
             }
         }
-    } catch (e) {
+    }
+    catch (e)
+    {
         showDangerAlert(alertBox, "Error when processing data: " + e);
     }
 }
 
-function notLoggedInHandler(alertBox) {
+function notLoggedInHandler(alertBox)
+{
     "use strict";
     showDangerAlert(alertBox, "You are not logged in. Navigating to login page...");
     setTimeout(
@@ -109,7 +122,8 @@ function notLoggedInHandler(alertBox) {
     );
 }
 
-function hotelNotFoundHandler(alertBox) {
+function hotelNotFoundHandler(alertBox)
+{
     "use strict";
     showDangerAlert(alertBox, "The specified hotel is not found. Navigating to hotel selection page...");
     setTimeout(
@@ -121,7 +135,8 @@ function hotelNotFoundHandler(alertBox) {
     );
 }
 
-function getRoomJsonList(brandName, hotelName, alertBox, callback) {
+function getRoomJsonList(brandName, hotelName, alertBox, callback)
+{
     "use strict";
     const apiAddress = "QueryServlet"
     $.ajax(
@@ -141,8 +156,10 @@ function getRoomJsonList(brandName, hotelName, alertBox, callback) {
                             "hotelName": hotelName
                         }
                 }),
-            success(data, textStatus) {
-                switch (data["code"]) {
+            success(data, textStatus)
+            {
+                switch (data["code"])
+                {
                     case "0":
                         callback(data["data"]);
                         break;
@@ -157,7 +174,8 @@ function getRoomJsonList(brandName, hotelName, alertBox, callback) {
                         break;
                 }
             },
-            error(jqXHR, textStatus, errorThrown) {
+            error(jqXHR, textStatus, errorThrown)
+            {
                 ajaxErrorHandler(jqXHR, textStatus, errorThrown, null, alertBox);
             }
         }

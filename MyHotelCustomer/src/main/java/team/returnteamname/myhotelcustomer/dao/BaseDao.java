@@ -3,8 +3,8 @@ package team.returnteamname.myhotelcustomer.dao;
 import org.jetbrains.annotations.NotNull;
 import team.returnteamname.myhotelcustomer.connection.ConnectionFactory;
 import team.returnteamname.myhotelcustomer.pojo.AbstractPojo;
-import team.returnteamname.myhotelcustomer.util.Pair;
-import team.returnteamname.myhotelcustomer.util.Util;
+import team.returnteamname.myhotelcustomer.util.container.Pair;
+import team.returnteamname.myhotelcustomer.util.GeneralUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -65,7 +65,7 @@ public class BaseDao
                 Object returnValue = method.invoke(pojo, (Object[]) null);
 
                 attributeMap
-                    .put(Util.camelCaseToUnderscoreLowerCase(fieldName), returnValue);
+                    .put(GeneralUtil.camelCaseToUnderscoreLowerCase(fieldName), returnValue);
             }
         }
 
@@ -105,7 +105,7 @@ public class BaseDao
                 return 0;
 
             sql = sql
-                .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
+                .replace("<tableName>", GeneralUtil.camelCaseToUnderscoreLowerCase(className))
                 .replace("<attributeList>", attributeNameBuilder)
                 .replace("<valuePlaceholderList>", valuePlaceholderBuilder);
 
@@ -153,7 +153,7 @@ public class BaseDao
                 conditionBuilder.append("1 = 1");
 
             sql = sql
-                .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
+                .replace("<tableName>", GeneralUtil.camelCaseToUnderscoreLowerCase(className))
                 .replace("<conditionList>", conditionBuilder);
 
             Connection        connection = ConnectionFactory.getInstance().getConnection();
@@ -200,7 +200,7 @@ public class BaseDao
                 conditionBuilder.append("1 = 1");
 
             sql = sql
-                .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
+                .replace("<tableName>", GeneralUtil.camelCaseToUnderscoreLowerCase(className))
                 .replace("<conditionList>", conditionBuilder);
 
             Connection        connection = ConnectionFactory.getInstance().getConnection();
@@ -220,7 +220,7 @@ public class BaseDao
                 AbstractPojo o = (AbstractPojo) clazz.getDeclaredConstructor().newInstance();
                 for (String attributeName : attributeMap.keySet())
                 {
-                    Field field = clazz.getDeclaredField(Util.underscoreLowerCaseToCamelCase(attributeName));
+                    Field field = clazz.getDeclaredField(GeneralUtil.underscoreLowerCaseToCamelCase(attributeName));
                     field.setAccessible(true);
 
                     field.set(o, resultSet.getObject(attributeName));
@@ -287,7 +287,7 @@ public class BaseDao
                 conditionBuilder.append("1 = 1");
 
             sql = sql
-                .replace("<tableName>", Util.camelCaseToUnderscoreLowerCase(className))
+                .replace("<tableName>", GeneralUtil.camelCaseToUnderscoreLowerCase(className))
                 .replace("<newValueList>", newValueBuilder)
                 .replace("<conditionList>", conditionBuilder);
 

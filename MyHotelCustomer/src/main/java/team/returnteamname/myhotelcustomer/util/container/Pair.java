@@ -1,4 +1,4 @@
-package team.returnteamname.myhotelcustomer.util;
+package team.returnteamname.myhotelcustomer.util.container;
 
 import java.io.Serializable;
 

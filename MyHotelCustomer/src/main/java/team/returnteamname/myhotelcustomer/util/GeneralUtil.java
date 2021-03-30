@@ -7,7 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.*;
 
-public class Util
+public class GeneralUtil
 {
     public static String camelCaseToUnderscoreLowerCase(String string)
     {
