@@ -1,8 +1,3 @@
-function bookingSuccess(alertBox)
-{
-    showSuccessAlert(alertBox, "Booking success");
-}
-
 function addColumn(json, index, tbody)
 {
     let s = ""
@@ -68,7 +63,7 @@ function generateButtonCallback(brandName, hotelName, id, alertBox)
                     switch (data["code"])
                     {
                         case "0":
-                            bookingSuccess(alertBox);
+                            showSuccessAlert(alertBox, "Booking success");
                             break;
                         default:
                             ajaxErrorHandler(null, textStatus, null, data["message"], alertBox);
@@ -99,7 +94,7 @@ function parseRoomListJson(hotelBrand, hotelName, array, tbody, alertBox)
             let button = $("button#button-" + i);
             if (button !== undefined)
             {
-                button.click(generateButtonCallback(hotelBrand, hotelName, array[i]["id"]), alertBox);
+                button.click(generateButtonCallback(hotelBrand, hotelName, array[i]["id"], alertBox));
             }
         }
     }

@@ -231,27 +231,8 @@ public class QueryServlet extends AbstractPostOnlyServlet
             rentRoomId.add(roomId);
         }
 
-        for (Integer eachRoomId : availableRoomId)
-        {
-            for (Integer eachBookedRoomId : bookedRoomId)
-            {
-                if (eachRoomId.equals(eachBookedRoomId))
-                {
-                    availableRoomId.remove(eachRoomId);
-                }
-            }
-        }
-
-        for (Integer eachRoomId : availableRoomId)
-        {
-            for (Integer eachRentRoomId : rentRoomId)
-            {
-                if (eachRoomId.equals(eachRentRoomId))
-                {
-                    availableRoomId.remove(eachRoomId);
-                }
-            }
-        }
+        availableRoomId.removeIf(bookedRoomId::contains);
+        availableRoomId.removeIf(rentRoomId::contains);
 
         for (Integer eachAvailableRoomId : availableRoomId)
         {
