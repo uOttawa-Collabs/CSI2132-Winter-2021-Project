@@ -14,4 +14,11 @@ public class Quadruplet<K, U, V, W> extends Triplet<K, U, V>
     {
         return theFourth;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Triplet(" + getKey().toString() + ", " + getValue().toString() + ", " + getTheThird()
+            .toString() + ", " + theFourth.toString() + ")";
+    }
 }

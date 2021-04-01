@@ -14,4 +14,10 @@ public class Triplet<K, V, W> extends Pair<K, V>
     {
         return theThird;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Triplet(" + getKey().toString() + ", " + getValue().toString()  + ", " + theThird.toString() + ")";
+    }
 }

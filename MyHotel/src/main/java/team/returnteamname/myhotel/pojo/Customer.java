@@ -11,19 +11,21 @@ public class Customer extends AbstractPojo
     private String  sinNumber;
     private String  address;
     private Date    dateOfRegistration;
+    private String  phoneNumber;
 
     public Customer()
     {
     }
 
     public Customer(@Nullable Integer id, @Nullable String fullName, @Nullable String sinNumber,
-                    @Nullable String address, @Nullable Date dateOfRegistration)
+                    @Nullable String address, @Nullable Date dateOfRegistration, @Nullable String phoneNumber)
     {
         this.id                 = id;
         this.fullName           = fullName;
         this.sinNumber          = sinNumber;
         this.address            = address;
         this.dateOfRegistration = dateOfRegistration;
+        this.phoneNumber        = phoneNumber;
     }
 
     @Nullable
@@ -79,5 +81,16 @@ public class Customer extends AbstractPojo
     public void setDateOfRegistration(@Nullable Date dateOfRegistration)
     {
         this.dateOfRegistration = dateOfRegistration;
+    }
+
+    @Nullable
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(@Nullable String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
     }
 }

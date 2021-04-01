@@ -5,6 +5,7 @@ CREATE TABLE customer
     sin_number           VARCHAR(9)   NOT NULL,
     address              VARCHAR(128) NOT NULL,
     date_of_registration DATE         NOT NULL,
+    phone_number         VARCHAR(16)  NOT NULL
     PRIMARY KEY (id)
 );
 

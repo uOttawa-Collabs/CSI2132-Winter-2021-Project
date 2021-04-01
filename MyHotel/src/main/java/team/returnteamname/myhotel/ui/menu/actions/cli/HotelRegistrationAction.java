@@ -1,17 +1,20 @@
-package team.returnteamname.myhotel.actions.cli;
+package team.returnteamname.myhotel.ui.menu.actions.cli;
 
 import team.returnteamname.myhotel.dao.BaseDao;
-import team.returnteamname.myhotel.pojo.*;
 import team.returnteamname.myhotel.ui.IUserInterface;
-import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.ui.menu.actions.AbstractAction;
 import team.returnteamname.myhotel.util.Pair;
 import team.returnteamname.myhotel.util.Quadruplet;
 import team.returnteamname.myhotel.util.Triplet;
+import team.returnteamname.myhotel.pojo.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
@@ -22,13 +25,14 @@ public class HotelRegistrationAction extends AbstractAction
     {
         try
         {
-            BaseDao baseDao = new BaseDao();
+            BaseDao                 baseDao        = new BaseDao();
             Pair<HotelBrand, Hotel> brandHotelPair = getBrandHotelPairFromUser(userInterface, baseDao);
             if (brandHotelPair == null)
                 return null;
 
             Set<Quadruplet<Room, Set<RoomAmenity>, Set<RoomExtensibility>, Set<RoomView>>> rooms = null;
-            String input = (String) userInterface.eventCallback("readLine", "Add rooms? <Y/n>");
+            String                                                                         input = (String) userInterface
+                .eventCallback("readLine", "Add rooms? <Y/n>");
             if (input.isEmpty() || (Character.toUpperCase(input.charAt(0)) != 'N'))
                 rooms = getRoomsFromUser(userInterface, brandHotelPair.getValue());
 
@@ -83,7 +87,8 @@ public class HotelRegistrationAction extends AbstractAction
         return new Pair<>(hotelBrand, hotel);
     }
 
-    private Triplet<String, String, Boolean> getNewHotelIdentifierFromUser(IUserInterface userInterface) throws SQLException
+    private Triplet<String, String, Boolean> getNewHotelIdentifierFromUser(IUserInterface userInterface)
+        throws SQLException
     {
         String                   query     = "SELECT hotel_brand_name, hotel_name FROM hotel;";
         Map<String, Set<String>> map       = new HashMap<>();
@@ -141,8 +146,8 @@ public class HotelRegistrationAction extends AbstractAction
         IUserInterface userInterface, Hotel hotel)
         throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException
     {
-        Set<Quadruplet<Room, Set<RoomAmenity>, Set<RoomExtensibility>, Set<RoomView>>> set = new HashSet<>();
-        Set<Integer> usedRoomId = new HashSet<>();
+        Set<Quadruplet<Room, Set<RoomAmenity>, Set<RoomExtensibility>, Set<RoomView>>> set        = new HashSet<>();
+        Set<Integer>                                                                   usedRoomId = new HashSet<>();
 
         do
         {
@@ -150,9 +155,9 @@ public class HotelRegistrationAction extends AbstractAction
             room.setHotelBrandName(hotel.getHotelBrandName());
             room.setHotelName(hotel.getHotelName());
 
-            Set<RoomAmenity> roomAmenitySet = new HashSet<>();
+            Set<RoomAmenity>       roomAmenitySet       = new HashSet<>();
             Set<RoomExtensibility> roomExtensibilitySet = new HashSet<>();
-            Set<RoomView> roomViewSet = new HashSet<>();
+            Set<RoomView>          roomViewSet          = new HashSet<>();
 
             do
             {
@@ -173,7 +178,7 @@ public class HotelRegistrationAction extends AbstractAction
                 return result;
             }).test(usedRoomId, room));
 
-            for (;;)
+            for (; ; )
             {
                 String input = (String) userInterface.eventCallback("readLine", "Add amenity? <Y/n>");
                 if (input.isEmpty() || (Character.toUpperCase(input.charAt(0)) != 'N'))
@@ -190,7 +195,7 @@ public class HotelRegistrationAction extends AbstractAction
                     break;
             }
 
-            for (;;)
+            for (; ; )
             {
                 String input = (String) userInterface.eventCallback("readLine", "Add extensibility? <Y/n>");
                 if (input.isEmpty() || (Character.toUpperCase(input.charAt(0)) != 'N'))
@@ -207,7 +212,7 @@ public class HotelRegistrationAction extends AbstractAction
                     break;
             }
 
-            for (;;)
+            for (; ; )
             {
                 String input = (String) userInterface.eventCallback("readLine", "Add view? <Y/n>");
                 if (input.isEmpty() || (Character.toUpperCase(input.charAt(0)) != 'N'))

@@ -1,14 +1,11 @@
-package team.returnteamname.myhotel.actions.cli;
+package team.returnteamname.myhotel.ui.menu.actions.cli;
 
 import team.returnteamname.myhotel.dao.BaseDao;
 import team.returnteamname.myhotel.pojo.*;
 import team.returnteamname.myhotel.ui.IUserInterface;
-import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.ui.menu.actions.AbstractAction;
 import team.returnteamname.myhotel.util.Pair;
-import team.returnteamname.myhotel.util.Util;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -46,9 +43,9 @@ public class HotelInformationAction extends AbstractAction
         HotelBrandPhoneNumber matcherHotelBrandPhoneNumber = new HotelBrandPhoneNumber();
         matcherHotelBrandPhoneNumber.setHotelBrandName(hotelBrandName);
 
-        HotelBrand hotelBrand = (HotelBrand) baseDao.select(matcherHotelBrand).getKey().get(0);
+        HotelBrand              hotelBrand             = (HotelBrand) baseDao.select(matcherHotelBrand).getKey().get(0);
         ArrayList<AbstractPojo> hotelBrandEmailAddress = baseDao.select(matcherHotelBrandEmailAddress).getKey();
-        ArrayList<AbstractPojo> hotelBrandPhoneNumber = baseDao.select(matcherHotelBrandPhoneNumber).getKey();
+        ArrayList<AbstractPojo> hotelBrandPhoneNumber  = baseDao.select(matcherHotelBrandPhoneNumber).getKey();
 
         // Hotel
         Hotel matcherHotel = new Hotel();
@@ -58,7 +55,7 @@ public class HotelInformationAction extends AbstractAction
         matcherHotelPhoneNumber.setHotelBrandName(hotelBrandName);
         matcherHotelPhoneNumber.setHotelName(hotelName);
 
-        Hotel hotel = (Hotel) baseDao.select(matcherHotel).getKey().get(0);
+        Hotel                   hotel            = (Hotel) baseDao.select(matcherHotel).getKey().get(0);
         ArrayList<AbstractPojo> hotelPhoneNumber = baseDao.select(matcherHotelPhoneNumber).getKey();
 
         // Room
@@ -78,15 +75,15 @@ public class HotelInformationAction extends AbstractAction
         matcherRoomView.setHotelBrandName(hotelBrandName);
         matcherRoomView.setHotelName(hotelName);
 
-        ArrayList<AbstractPojo> room = baseDao.select(matcherRoom).getKey();
-        Map<Integer, Set<String>> roomAmenity = new HashMap<>();
+        ArrayList<AbstractPojo>   room              = baseDao.select(matcherRoom).getKey();
+        Map<Integer, Set<String>> roomAmenity       = new HashMap<>();
         Map<Integer, Set<String>> roomExtensibility = new HashMap<>();
-        Map<Integer, Set<String>> roomView = new HashMap<>();
+        Map<Integer, Set<String>> roomView          = new HashMap<>();
 
         for (AbstractPojo pojo : room)
         {
-            Room r = (Room) pojo;
-            Integer roomId = r.getRoomId();
+            Room                    r      = (Room) pojo;
+            Integer                 roomId = r.getRoomId();
             ArrayList<AbstractPojo> arrayList;
 
             roomAmenity.computeIfAbsent(roomId, k -> new HashSet<>());

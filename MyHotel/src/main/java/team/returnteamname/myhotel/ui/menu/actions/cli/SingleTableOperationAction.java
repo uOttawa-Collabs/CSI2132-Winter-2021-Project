@@ -1,17 +1,12 @@
-package team.returnteamname.myhotel.actions.cli;
+package team.returnteamname.myhotel.ui.menu.actions.cli;
 
-import org.postgresql.util.PGInterval;
 import team.returnteamname.myhotel.config.IConfigConstant;
 import team.returnteamname.myhotel.dao.BaseDao;
 import team.returnteamname.myhotel.pojo.AbstractPojo;
 import team.returnteamname.myhotel.ui.IUserInterface;
-import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.ui.menu.actions.AbstractAction;
 import team.returnteamname.myhotel.util.Pair;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -144,7 +139,8 @@ public class SingleTableOperationAction extends AbstractAction
         try
         {
             userInterface.eventCallback("printLine", "Please populate the matcher.");
-            AbstractPojo                             matcher = CommonUtil.getPojoInstanceFromUser(userInterface, pojoClass);
+            AbstractPojo                             matcher = CommonUtil
+                .getPojoInstanceFromUser(userInterface, pojoClass);
             BaseDao                                  dao     = new BaseDao();
             Pair<ArrayList<AbstractPojo>, ResultSet> pair    = dao.select(matcher);
 

@@ -1,4 +1,4 @@
-package team.returnteamname.myhotel.actions.cli;
+package team.returnteamname.myhotel.ui.menu.actions.cli;
 
 import org.postgresql.util.PGInterval;
 import team.returnteamname.myhotel.dao.BaseDao;
@@ -87,7 +87,8 @@ public class CommonUtil
         return getPojoInstanceFromUser(userInterface, null, shadow);
     }
 
-    private static AbstractPojo getPojoInstanceFromUser(IUserInterface userInterface, Class<?> pojoClass, AbstractPojo shadow)
+    private static AbstractPojo getPojoInstanceFromUser(IUserInterface userInterface, Class<?> pojoClass,
+                                                        AbstractPojo shadow)
         throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
     {
         AbstractPojo pojo;
@@ -96,7 +97,7 @@ public class CommonUtil
         else
             pojo = shadow;
 
-        Field[]      fields = pojo.getClass().getDeclaredFields();
+        Field[] fields = pojo.getClass().getDeclaredFields();
 
         for (Field field : fields)
         {

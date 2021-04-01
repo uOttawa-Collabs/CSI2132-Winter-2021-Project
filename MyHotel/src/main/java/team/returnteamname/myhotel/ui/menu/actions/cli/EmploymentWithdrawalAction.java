@@ -1,10 +1,9 @@
-package team.returnteamname.myhotel.actions.cli;
+package team.returnteamname.myhotel.ui.menu.actions.cli;
 
 import team.returnteamname.myhotel.dao.BaseDao;
-import team.returnteamname.myhotel.pojo.AbstractPojo;
 import team.returnteamname.myhotel.pojo.Employment;
 import team.returnteamname.myhotel.ui.IUserInterface;
-import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.ui.menu.actions.AbstractAction;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,7 +60,8 @@ public class EmploymentWithdrawalAction extends AbstractAction
             {
                 try
                 {
-                    String input = (String) userInterface.eventCallback("readLine", "Please enter the ID of an employee, or type \"q\" to quit");
+                    String input = (String) userInterface
+                        .eventCallback("readLine", "Please enter the ID of an employee, or type \"q\" to quit");
                     input = input.trim();
                     if (input.equals("q"))
                         return -1;

@@ -1,18 +1,15 @@
-package team.returnteamname.myhotel.actions.cli;
+package team.returnteamname.myhotel.ui.menu.actions.cli;
 
 import team.returnteamname.myhotel.dao.BaseDao;
 import team.returnteamname.myhotel.pojo.Employment;
 import team.returnteamname.myhotel.ui.IUserInterface;
-import team.returnteamname.myhotel.ui.menu.AbstractAction;
+import team.returnteamname.myhotel.ui.menu.actions.AbstractAction;
 import team.returnteamname.myhotel.util.Pair;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public class EmploymentAssignmentAction extends AbstractAction

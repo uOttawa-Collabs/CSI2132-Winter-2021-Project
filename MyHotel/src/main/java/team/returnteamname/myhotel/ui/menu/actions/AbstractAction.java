@@ -1,4 +1,4 @@
-package team.returnteamname.myhotel.ui.menu;
+package team.returnteamname.myhotel.ui.menu.actions;
 
 import team.returnteamname.myhotel.ui.IUserInterface;
 

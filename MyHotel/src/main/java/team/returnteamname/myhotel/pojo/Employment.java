@@ -4,7 +4,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class Employment extends AbstractPojo
 {
-    private String hotelBrandName;
+    private String  hotelBrandName;
     private String  hotelName;
     private Integer employeeId;
 

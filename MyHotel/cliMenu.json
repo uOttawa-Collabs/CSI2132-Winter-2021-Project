@@ -5,7 +5,7 @@
         {
             "name": "Single table operation",
             "type": "action",
-            "content": ".actions.cli.SingleTableOperationAction"
+            "content": ".ui.menu.actions.cli.SingleTableOperationAction"
         },
         {
             "name": "Applications",
@@ -18,12 +18,12 @@
                         {
                             "name": "View overall information about a hotel",
                             "type": "action",
-                            "content": ".actions.cli.HotelInformationAction"
+                            "content": ".ui.menu.actions.cli.HotelInformationAction"
                         },
                         {
                             "name": "Register a hotel",
                             "type": "action",
-                            "content": ".actions.cli.HotelRegistrationAction"
+                            "content": ".ui.menu.actions.cli.HotelRegistrationAction"
                         }
                     ]
                 },
@@ -34,12 +34,12 @@
                         {
                             "name": "Assign an employee",
                             "type": "action",
-                            "content": ".actions.cli.EmploymentAssignmentAction"
+                            "content": ".ui.menu.actions.cli.EmploymentAssignmentAction"
                         },
                         {
                             "name": "Withdraw an employee",
                             "type": "action",
-                            "content": ".actions.cli.EmploymentWithdrawalAction"
+                            "content": ".ui.menu.actions.cli.EmploymentWithdrawalAction"
                         }
                     ]
                 }
@@ -48,12 +48,12 @@
         {
             "name": "Execute custom SQL statement",
             "type": "action",
-            "content": ".actions.cli.ExecuteSqlAction"
+            "content": ".ui.menu.actions.cli.ExecuteSqlAction"
         },
         {
             "name": "Quit program",
             "type": "action",
-            "content": ".actions.cli.QuitAction"
+            "content": ".ui.menu.actions.cli.QuitAction"
         }
     ]
 }
