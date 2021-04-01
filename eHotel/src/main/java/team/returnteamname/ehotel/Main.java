@@ -94,7 +94,7 @@ public class Main
         {
             while (!serviceChooseCheck)
             {
-                System.out.println("1.Check-in / 2.Check-out / 3.Access avaliable rooms / 4.Access booked rooms");
+                System.out.println("1.Check-in / 2.Check-out / 3.Access available rooms / 4.Access booked rooms");
                 System.out.print("Please select which service you want to do? (1/2/3/4) ");
 
                 String num = scan.nextLine();
@@ -109,7 +109,7 @@ public class Main
 
                         String customerId = scan.nextLine();
                         int    customerID = Integer.parseInt(customerId);
-                        Book   b          = employeeService.accessBook(customerID);
+                        Book   b          = employeeService.accessBook(customerID, hotelBrandName, hotelName);
 
                         //Check-in with booking
                         if (b != null)
@@ -118,7 +118,7 @@ public class Main
                             String day  = scan.nextLine();
                             int    days = Integer.parseInt(day);
 
-                            boolean checkIn = employeeService.checkInWithBooking(customerID, b, days, employeeID);
+                            boolean checkIn = employeeService.checkInWithBooking(customerID, hotelBrandName, hotelName, b, days, employeeID);
 
                             if (checkIn)
                             {
@@ -189,8 +189,8 @@ public class Main
 
                         String  customerId = scan.nextLine();
                         int     customerID = Integer.parseInt(customerId);
-                        Rent    r          = employeeService.accessRent(customerID);
-                        boolean checkout   = employeeService.checkOut(customerID, r, employeeID);
+                        Rent    r          = employeeService.accessRent(customerID, hotelBrandName, hotelName);
+                        boolean checkout   = employeeService.checkOut(customerID, hotelBrandName, hotelName, r, employeeID);
 
                         if (checkout)
                         {
@@ -306,7 +306,6 @@ public class Main
                                                 rsEmployment.getString("hotel_name"), employeeId);
                 }
 
-
                 if (employment.getEmployeeId() == 0)
                 {
                     employment = null;
@@ -326,8 +325,8 @@ public class Main
     /* Access available rooms for the employee's employment hotel */
     public List<Room> accessAvailableRoom(int employeeId)
     {
-        List<Room> totalRooms  = new ArrayList<Room>();
-        List<Room> bookedRooms = new ArrayList<Room>();
+        List<Room> totalRooms  = new ArrayList<>();
+        List<Room> bookedRooms = new ArrayList<>();
 
         try
         {
@@ -447,13 +446,14 @@ public class Main
     }
 
     /* Query specific row with CustomerId from 'Book' table */
-    public Book accessBook(int CustomerId)
+    public Book accessBook(int CustomerId, String hotelBrandName, String hotelName)
     {
         Book customerBook = new Book();
 
         try
         {
-            String    query = "SELECT * FROM book WHERE customer_id= '" + CustomerId + "'";
+            String    query = "SELECT * FROM book WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
+                              + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
             ResultSet rs    = stmt.executeQuery(query);
 
             if (rs == null)
@@ -485,12 +485,13 @@ public class Main
         return customerBook;
     }
 
-    /* Delete a specific row with CustomerId from 'Book' table */
-    public boolean deleteBook(int CustomerId)
+    /* Delete a specific row from 'Book' table */
+    public boolean deleteBook(int CustomerId, String hotelBrandName, String hotelName)
     {
         try
         {
-            String delete = "DELETE FROM book WHERE customer_id= '" + CustomerId + "'";
+            String delete = "DELETE FROM book WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
+                            + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
             stmt.executeUpdate(delete);
         }
 
@@ -504,12 +505,13 @@ public class Main
     }
 
     /* Query specific row with CustomerId from 'Rent' table */
-    public Rent accessRent(int CustomerId)
+    public Rent accessRent(int CustomerId, String hotelBrandName, String hotelName)
     {
         Rent customerRent = new Rent();
         try
         {
-            String    query = "SELECT * FROM rent WHERE customer_id= '" + CustomerId + "'";
+            String    query = "SELECT * FROM rent WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
+                              + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
             ResultSet rs    = stmt.executeQuery(query);
 
             while (rs.next())
@@ -634,11 +636,12 @@ public class Main
     }
 
     /* Delete a row with a specific CustomerId from 'Rent' table */
-    public boolean deleteRent(int customerId)
+    public boolean deleteRent(int customerId, String hotelBrandName, String hotelName)
     {
         try
         {
-            String delete = "DELETE FROM rent WHERE customer_id= '" + customerId + "'";
+            String delete = "DELETE FROM rent WHERE customer_id= '" + customerId + "' AND hotel_brand_name = '"
+                    + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
             stmt.executeUpdate(delete);
         }
 
@@ -706,18 +709,18 @@ public class Main
     }
 
     /* Check-in Operation: Transform 'Book' info to 'Rent' table */
-    public boolean checkInWithBooking(int customerId, Book b, int day, int checkInEmployeeId)
+    public boolean checkInWithBooking(int customerId, String hotelBrandName, String hotelName, Book b, int day, int checkInEmployeeId)
     {
-        boolean deleteB = deleteBook(customerId);
+        boolean deleteB = deleteBook(customerId, hotelBrandName, hotelName);
         boolean insertR = insertRentWithBooking(b, day, checkInEmployeeId);
 
         return deleteB && insertR;
     }
 
     /* Check-out Operation: Transform 'Rent' info to 'Rent_History' table */
-    public boolean checkOut(int customerId, Rent r, int checkOutEmployeeId)
+    public boolean checkOut(int customerId, String hotelBrandName, String hotelName, Rent r, int checkOutEmployeeId)
     {
-        boolean deleteR  = deleteRent(customerId);
+        boolean deleteR  = deleteRent(customerId, hotelBrandName, hotelName);
         boolean insertRH = insertRentHistory(r, checkOutEmployeeId);
 
         return deleteR && insertRH;
