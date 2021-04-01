@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="MyHotel.main:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6bd9b6ed-c9bc-4e8c-9262-425c074a6531" name="Default Changelist" comment="Add phone_number attribute to schema&#10;MyHotel program update" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MyHotel" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MyHotel" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MyHotel" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MyHotel" type="f1a62948:ProjectNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1pkAh8MDzbSmwUR6pBeKOAFUs9a" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.11035156" />
+    <property name="project.structure.side.proportion" value="0.25747126" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="database.sql.templating" />
+    <property name="sql.codeStylePanel.last.previewDialect" value="PostgreSQL" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="team.returnteamname.myhotel.ui.menu.actions" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="team.returnteamname.myhotel.actions.cli" />
+      <recent name="team.returnteamname.myhotel.ui.menu.actions" />
+      <recent name="team.returnteamname.myhotel.pojo" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.MyHotel [build]">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="team.returnteamname.myhotel.Main" />
+      <module name="MyHotel.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.returnteamname.myhotel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyHotel [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--stacktrace" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MyHotel [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="MyHotel [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Gradle.MyHotel [jar]" />
+      <item itemvalue="Gradle.MyHotel [build]" />
+      <item itemvalue="Gradle.MyHotel [clean]" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.MyHotel [build]" />
+        <item itemvalue="Gradle.MyHotel [jar]" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.MyHotel [clean]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bd9b6ed-c9bc-4e8c-9262-425c074a6531" name="Default Changelist" comment="" />
+      <created>1615716834813</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615716834813</updated>
+      <workItem from="1615716836949" duration="3897000" />
+      <workItem from="1615748180013" duration="13714000" />
+      <workItem from="1615975394603" duration="37000" />
+      <workItem from="1615975586470" duration="7182000" />
+      <workItem from="1615982821297" duration="30506000" />
+      <workItem from="1616169140541" duration="752000" />
+      <workItem from="1616170015246" duration="40825000" />
+      <workItem from="1616316765281" duration="13834000" />
+      <workItem from="1616366961157" duration="2056000" />
+      <workItem from="1616618053127" duration="2618000" />
+      <workItem from="1616881903610" duration="3641000" />
+      <workItem from="1616885579047" duration="14610000" />
+      <workItem from="1616942054138" duration="7897000" />
+      <workItem from="1617081947236" duration="393000" />
+      <workItem from="1617097852695" duration="171000" />
+      <workItem from="1617233173267" duration="1154000" />
+      <workItem from="1617234379856" duration="1049000" />
+      <workItem from="1617235475386" duration="739000" />
+    </task>
+    <task id="LOCAL-00001" summary="Basic DB connection features">
+      <created>1615717258267</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1615717258267</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Basic DB connection features">
+      <created>1615720547843</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1615720547843</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Generic database operation completed (reflection)">
+      <created>1616037219357</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616037219357</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Created POJO classes">
+      <created>1616046675723</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616046675723</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Cleaned code">
+      <created>1616046722014</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1616046722014</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Made all POJO classes extend the AbstractPojo class&#10;Changed BaseDao to only accept AbstractPojo objects">
+      <created>1616098133962</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616098133962</updated>
+    </task>
+    <task id="LOCAL-00007" summary="UI finished (almost)">
+      <created>1616254782347</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1616254782347</updated>
+    </task>
+    <task id="LOCAL-00008" summary="SingleTableOperationAction almost finished">
+      <created>1616321010842</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616321010842</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Finished SingleTableOperationAction&#10;Changed DB schema&#10;Fixed some bugs&#10;Drew some pancakes">
+      <created>1616358148296</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616358148296</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Finished ExecuteSqlAction">
+      <created>1616621614956</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1616621614956</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Finished ExecuteSqlAction">
+      <created>1616622059109</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1616622059109</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Remove unnecessary classes&#10;Automatically obtaining list of POJO classes and generating IConfigConstant.java">
+      <created>1616725874091</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1616725874091</updated>
+    </task>
+    <task id="LOCAL-00013" summary="EmploymentAssignmentAction finished&#10;Some adjustment and bug fix">
+      <created>1616828468543</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1616828468543</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Schema update&#10;Finished EmploymentAssignmentAction EmploymentWithdrawalAction">
+      <created>1616885378412</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1616885378412</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Changed connection application name&#10;GPG signing test">
+      <created>1616896623239</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1616896623239</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Done">
+      <created>1616949325349</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1616949325349</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add phone_number attribute to schema&#10;MyHotel program update">
+      <created>1617235983654</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617235983654</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/employee" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Basic DB connection features" />
+    <MESSAGE value="Generic database operation completed (reflection)" />
+    <MESSAGE value="Created POJO classes" />
+    <MESSAGE value="Cleaned code" />
+    <MESSAGE value="Made all POJO classes extend the AbstractPojo class&#10;Changed BaseDao to only accept AbstractPojo objects" />
+    <MESSAGE value="UI finished (almost)" />
+    <MESSAGE value="SingleTableOperationAction almost finished" />
+    <MESSAGE value="Finished SingleTableOperationAction&#10;Changed DB schema&#10;Fixed some bugs&#10;Drew some pancakes" />
+    <MESSAGE value="Finished ExecuteSqlAction" />
+    <MESSAGE value="Remove unnecessary classes&#10;Automatically obtaining list of POJO classes and generating IConfigConstant.java" />
+    <MESSAGE value="EmploymentAssignmentAction finished&#10;Some adjustment and bug fix" />
+    <MESSAGE value="Schema update&#10;Finished EmploymentAssignmentAction EmploymentWithdrawalAction" />
+    <MESSAGE value="Changed connection application name&#10;GPG signing test" />
+    <MESSAGE value="Done" />
+    <MESSAGE value="Add phone_number attribute to schema&#10;MyHotel program update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add phone_number attribute to schema&#10;MyHotel program update" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MyHotel$Main.ic" NAME="Main Coverage Results" MODIFIED="1616316126845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>team.returnteamname.myhotel.*</FILTER>
+    </SUITE>
+  </component>
+</project>
