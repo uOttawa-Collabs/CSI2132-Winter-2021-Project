@@ -1,5 +1,6 @@
 package team.returnteamname.ehotel.pojo;
 
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.Date;
 
@@ -10,68 +11,86 @@ public class Customer extends AbstractPojo
     private String  sinNumber;
     private String  address;
     private Date    dateOfRegistration;
+    private String  phoneNumber;
 
     public Customer()
     {
     }
 
-    public Customer(Integer id, String fullName, String sinNumber,
-                    String address, Date dateOfRegistration)
+    public Customer(@Nullable Integer id, @Nullable String fullName, @Nullable String sinNumber,
+                    @Nullable String address, @Nullable Date dateOfRegistration, @Nullable String phoneNumber)
     {
         this.id                 = id;
         this.fullName           = fullName;
         this.sinNumber          = sinNumber;
         this.address            = address;
         this.dateOfRegistration = dateOfRegistration;
+        this.phoneNumber        = phoneNumber;
     }
 
+    @Nullable
     public Integer getId()
     {
         return id;
     }
 
-    public void setId(Integer id)
+    public void setId(@Nullable Integer id)
     {
         this.id = id;
     }
 
+    @Nullable
     public String getFullName()
     {
         return fullName;
     }
 
-    public void setFullName(String fullName)
+    public void setFullName(@Nullable String fullName)
     {
         this.fullName = fullName;
     }
 
+    @Nullable
     public String getSinNumber()
     {
         return sinNumber;
     }
 
-    public void setSinNumber(String sinNumber)
+    public void setSinNumber(@Nullable String sinNumber)
     {
         this.sinNumber = sinNumber;
     }
 
+    @Nullable
     public String getAddress()
     {
         return address;
     }
 
-    public void setAddress(String address)
+    public void setAddress(@Nullable String address)
     {
         this.address = address;
     }
 
+    @Nullable
     public Date getDateOfRegistration()
     {
         return dateOfRegistration;
     }
 
-    public void setDateOfRegistration(Date dateOfRegistration)
+    public void setDateOfRegistration(@Nullable Date dateOfRegistration)
     {
         this.dateOfRegistration = dateOfRegistration;
+    }
+
+    @Nullable
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(@Nullable String phoneNumber)
+    {
+        this.phoneNumber = phoneNumber;
     }
 }
