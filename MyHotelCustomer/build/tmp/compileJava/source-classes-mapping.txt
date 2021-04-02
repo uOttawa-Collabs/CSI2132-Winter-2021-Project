@@ -32,8 +32,8 @@ team/returnteamname/myhotelcustomer/util/GeneralUtil.java
 team/returnteamname/myhotelcustomer/pojo/servlet/HotelListResponsePojo.java
  team.returnteamname.myhotelcustomer.pojo.servlet.HotelListResponsePojo
  team.returnteamname.myhotelcustomer.pojo.servlet.HotelListResponsePojo$Data
-team/returnteamname/myhotelcustomer/pojo/db/HotelBrandEmailAddress.java
- team.returnteamname.myhotelcustomer.pojo.db.HotelBrandEmailAddress
+team/returnteamname/myhotelcustomer/servlet/QueryServlet.java
+ team.returnteamname.myhotelcustomer.servlet.QueryServlet
 team/returnteamname/myhotelcustomer/pojo/db/HotelPhoneNumber.java
  team.returnteamname.myhotelcustomer.pojo.db.HotelPhoneNumber
 team/returnteamname/myhotelcustomer/util/source/FileConfigSource.java
@@ -60,17 +60,17 @@ team/returnteamname/myhotelcustomer/pojo/servlet/ResponsePojo.java
  team.returnteamname.myhotelcustomer.pojo.servlet.ResponsePojo
 team/returnteamname/myhotelcustomer/config/ConfigManager.java
  team.returnteamname.myhotelcustomer.config.ConfigManager
-team/returnteamname/myhotelcustomer/pojo/db/Hotel.java
- team.returnteamname.myhotelcustomer.pojo.db.Hotel
+team/returnteamname/myhotelcustomer/pojo/db/Customer.java
+ team.returnteamname.myhotelcustomer.pojo.db.Customer
 team/returnteamname/myhotelcustomer/servlet/BookServlet.java
  team.returnteamname.myhotelcustomer.servlet.BookServlet
-team/returnteamname/myhotelcustomer/servlet/QueryServlet.java
- team.returnteamname.myhotelcustomer.servlet.QueryServlet
+team/returnteamname/myhotelcustomer/servlet/LoginServlet.java
+ team.returnteamname.myhotelcustomer.servlet.LoginServlet
 team/returnteamname/myhotelcustomer/util/container/Pair.java
  team.returnteamname.myhotelcustomer.util.container.Pair
 team/returnteamname/myhotelcustomer/pojo/db/RoomAmenity.java
  team.returnteamname.myhotelcustomer.pojo.db.RoomAmenity
-team/returnteamname/myhotelcustomer/servlet/LoginServlet.java
- team.returnteamname.myhotelcustomer.servlet.LoginServlet
-team/returnteamname/myhotelcustomer/pojo/db/Customer.java
- team.returnteamname.myhotelcustomer.pojo.db.Customer
+team/returnteamname/myhotelcustomer/pojo/db/Hotel.java
+ team.returnteamname.myhotelcustomer.pojo.db.Hotel
+team/returnteamname/myhotelcustomer/pojo/db/HotelBrandEmailAddress.java
+ team.returnteamname.myhotelcustomer.pojo.db.HotelBrandEmailAddress
