@@ -13,11 +13,9 @@ import team.returnteamname.ehotel.pojo.Room;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main
 {
@@ -41,7 +39,7 @@ public class Main
         }
     }
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, NullPointerException, SQLException
     {
         Scanner scan = new Scanner(System.in);
 
@@ -207,7 +205,7 @@ public class Main
 
                         String numOfRooms = String.valueOf(availableRooms.size());
                         System.out.println(
-                            "There are " + numOfRooms + " rooms are available in " + hotelName + " (" + hotelBrandName + ")");
+                                "There are " + numOfRooms + " rooms are available in " + hotelName + " (" + hotelBrandName + ")");
 
                         for (int i = 0; i < availableRooms.size(); i++)
                         {
@@ -217,11 +215,11 @@ public class Main
                             String price  = (room.getPrice()).toString();
 
                             System.out.println(
-                                "Room ID: " + roomId + "; Price: " + price + "; Room capacity: " + room
-                                    .getRoomCapacity());
-
-                            serviceChooseCheck = true;
+                                    "Room ID: " + roomId + "; Price: " + price + "; Room capacity: " + room
+                                            .getRoomCapacity());
                         }
+
+                        serviceChooseCheck = true;
                         break;
                     }
                     case "4":
@@ -231,7 +229,7 @@ public class Main
 
                         String numOfRooms = String.valueOf(bookedRooms.size());
                         System.out.println(
-                            "There are " + numOfRooms + " rooms are booked in " + hotelName + " (" + hotelBrandName + ")");
+                            "There is/are " + numOfRooms + " room(s) are booked in " + hotelName + " (" + hotelBrandName + ")");
 
                         for (int i = 0; i < bookedRooms.size(); i++)
                         {
@@ -248,7 +246,6 @@ public class Main
                                 "Room ID: " + roomId + "; Customer ID: " + customerId + "; Check-in Date： " + checkInDate
                                 + "; Room Type: " + bookRoom
                                     .getRoomType() + "; Total number of occupants: " + totalNumberOccupants);
-
                         }
 
                         serviceChooseCheck = true;
@@ -274,427 +271,332 @@ public class Main
                 serviceYNCheck     = true;
                 serviceChooseCheck = false;
             }
-
         }
     }
 
-    public Connection getConnection()
-    {
-        return c;
-    }
 
     /* Query 'Employment' table to get hotel_brand_name and hotel_name */
-    public Employment accessEmployment(int employeeId)
+    public Employment accessEmployment(int employeeId) throws SQLException
     {
         Employment employment = new Employment();
 
-        try
+        String    queryEmployment = "SELECT * FROM employment WHERE employee_id= '" + employeeId + "'";
+        ResultSet rsEmployment    = stmt.executeQuery(queryEmployment);
+
+        if (rsEmployment == null)
         {
-            String    queryEmployment = "SELECT * FROM employment WHERE employee_id= '" + employeeId + "'";
-            ResultSet rsEmployment    = stmt.executeQuery(queryEmployment);
-
-            if (rsEmployment == null)
-            {
-                return null;
-            }
-
-            else
-            {
-                while (rsEmployment.next())
-                {
-                    employment = new Employment(rsEmployment.getString("hotel_brand_name"),
-                                                rsEmployment.getString("hotel_name"), employeeId);
-                }
-
-                if (employment.getEmployeeId() == 0)
-                {
-                    employment = null;
-                }
-            }
+            return null;
         }
 
-        catch (SQLException e)
+        else
         {
-            System.out.println(e.getMessage());
-            return null;
+            while (rsEmployment.next())
+            {
+                employment = new Employment(rsEmployment.getString("hotel_brand_name"),
+                                            rsEmployment.getString("hotel_name"), employeeId);
+            }
+
+            if (employment.getEmployeeId() == 0)
+            {
+                employment = null;
+            }
         }
 
         return employment;
     }
 
     /* Access available rooms for the employee's employment hotel */
-    public List<Room> accessAvailableRoom(int employeeId)
+    public List<Room> accessAvailableRoom(int employeeId) throws SQLException, NullPointerException
     {
-        List<Room> totalRooms  = new ArrayList<>();
-        List<Room> bookedRooms = new ArrayList<>();
+        List<Integer> availableRoomId   = new ArrayList<>();
+        List<Integer> bookedRoomId      = new ArrayList<>();
+        List<Integer> rentRoomId        = new ArrayList<>();
+        List<Room>    availableRoomInfo = new ArrayList<>();
 
-        try
+        // Query 'Employment' table to get hotel_brand_name and hotel_name
+        Employment employment     = accessEmployment(employeeId);
+        String     hotelBrandName = employment.getHotelBrandName();
+        String     hotelName      = employment.getHotelName();
+
+        // According to hotel_brand_name and hotel_name, Query 'Room' table to get room_id
+        String queryRoom = "SELECT room_id FROM room WHERE hotel_brand_name= '" + hotelBrandName
+                           + "' AND hotel_name = '" + hotelName + "'";
+        ResultSet rsRoom = stmt.executeQuery(queryRoom);
+
+        while (rsRoom.next())
         {
-            // Query 'Employment' table to get hotel_brand_name and hotel_name
-            Employment employment     = accessEmployment(employeeId);
-            String     hotelBrandName = employment.getHotelBrandName();
-            String     hotelName      = employment.getHotelName();
+            Integer roomId = rsRoom.getInt("room_id");
+            availableRoomId.add(roomId);
+        }
 
-            // According to hotel_brand_name and hotel_name, Query 'Room' table to get room_id
-            String queryRoom = "SELECT * FROM room WHERE hotel_brand_name= '" + hotelBrandName
-                               + "' AND hotel_name = '" + hotelName + "'";
-            ResultSet rsRoom = stmt.executeQuery(queryRoom);
+        // According to hotel_brand_name and hotel_name, Query 'Book' table to get room_id
+        String queryBook = "SELECT room_id FROM book WHERE hotel_brand_name='" + hotelBrandName
+                    + "' AND hotel_name = '" + hotelName + "'";
+        ResultSet rsBook = stmt.executeQuery(queryBook);
 
-            Room totalRoom;
+        while (rsBook.next())
+        {
+            Integer roomId = rsBook.getInt("room_id");
+            bookedRoomId.add(roomId);
+        }
 
-            while (rsRoom.next())
+        // According to hotel_brand_name and hotel_name, Query 'Rent' table to get room_id
+        String queryRent = "SELECT room_id FROM rent WHERE hotel_brand_name='" + hotelBrandName
+                           + "' AND hotel_name = '" + hotelName + "'";
+        ResultSet rsRent = stmt.executeQuery(queryRent);
+
+        while (rsRent.next())
+        {
+            Integer roomId  = rsRent.getInt("room_id");
+            rentRoomId.add(roomId);
+        }
+
+        availableRoomId.removeIf(bookedRoomId::contains);
+        availableRoomId.removeIf(rentRoomId::contains);
+
+        for(Integer eachAvailableRoomId: availableRoomId)
+        {
+            String queryRoomInfo = "SELECT * FROM room WHERE hotel_brand_name='" + hotelBrandName
+                                   + "' AND hotel_name = '" + hotelName + "' AND room_id = '" + eachAvailableRoomId + "'";
+            ResultSet rsRoomInfo = stmt.executeQuery(queryRoomInfo);
+
+            Room availableRoom;
+
+            while (rsRoomInfo.next())
             {
-                int        roomId       = rsRoom.getInt("room_id");
-                BigDecimal price        = rsRoom.getBigDecimal("price");
-                String     roomCapacity = rsRoom.getString("room_capacity");
-
-                totalRoom = new Room(hotelBrandName, hotelName, roomId, price, roomCapacity);
-                totalRooms.add(totalRoom);
-            }
-
-            // According to hotel_brand_name and hotel_name, Query 'Book' table to get room_id
-            String queryBook = "SELECT room_id FROM book WHERE hotel_brand_name='" + hotelBrandName
-                               + "' AND hotel_name = '" + hotelName + "'";
-            ResultSet rsBook = stmt.executeQuery(queryBook);
-
-            while (rsBook.next())
-            {
-                int        roomId           = rsBook.getInt("room_id");
-                BigDecimal bookPrice        = new BigDecimal("0.00");
-                String     bookRoomCapacity = "";
-
-                for (int i = 0; i < totalRooms.size(); i++)
-                {
-                    Room room;
-                    room = totalRooms.get(i);
-
-                    if (roomId == room.getRoomId())
-                    {
-                        bookPrice        = room.getPrice();
-                        bookRoomCapacity = room.getRoomCapacity();
-                    }
-
-                    Room bookedRoom = new Room(hotelBrandName, hotelName, roomId, bookPrice, bookRoomCapacity);
-                    bookedRooms.add(bookedRoom);
-                }
-            }
-
-
-            // Find same roomIds between 'Room' table and 'Book' table
-            // and remove them from totalRooms
-            for (int i = 0; i < bookedRooms.size(); i++)
-            {
-                Room bookedRoom2   = bookedRooms.get(i);
-                int  bookedRoomId2 = bookedRoom2.getRoomId();
-
-                for (int j = 0; j < totalRooms.size(); j++)
-                {
-                    Room totalRoom2   = totalRooms.get(j);
-                    int  totalRoomId2 = totalRoom2.getRoomId();
-
-                    if (bookedRoomId2 == totalRoomId2)
-                    {
-                        totalRooms.remove(j);
-                    }
-                }
+                availableRoom = new Room(hotelBrandName, hotelName, eachAvailableRoomId, rsRoomInfo.getBigDecimal("price"),
+                                         rsRoomInfo.getString("room_capacity"));
+                availableRoomInfo.add(availableRoom);
             }
         }
 
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-        return totalRooms;
+        return availableRoomInfo;
     }
 
+
     /* Access booked rooms information for the employee's employment hotel */
-    public List<Book> accessBookedRoom(int employeeId)
+    public List<Book> accessBookedRoom(int employeeId) throws SQLException, NullPointerException
     {
         List<Book> bookedRooms = new ArrayList<>();
 
-        try
+
+        // Query 'Employment' table to get hotel_brand_name and hotel_name
+        Employment employment     = accessEmployment(employeeId);
+        String     hotelBrandName = employment.getHotelBrandName();
+        String     hotelName      = employment.getHotelName();
+
+        // According to hotel_brand_name and hotel_name, Query 'Book' table to get booked information
+        String queryBook = "SELECT * FROM book WHERE hotel_brand_name='" + hotelBrandName
+                           + "' AND hotel_name = '" + hotelName + "'";
+        ResultSet rsBook = stmt.executeQuery(queryBook);
+
+        while (rsBook.next())
         {
-            // Query 'Employment' table to get hotel_brand_name and hotel_name
-            Employment employment     = accessEmployment(employeeId);
-            String     hotelBrandName = employment.getHotelBrandName();
-            String     hotelName      = employment.getHotelName();
-
-            // According to hotel_brand_name and hotel_name, Query 'Book' table to get booked information
-            String queryBook = "SELECT * FROM book WHERE hotel_brand_name='" + hotelBrandName
-                               + "' AND hotel_name = '" + hotelName + "'";
-            ResultSet rsBook = stmt.executeQuery(queryBook);
-
-            while (rsBook.next())
-            {
-                Book customerBook = new Book(rsBook.getInt("customer_id"), rsBook.getString("hotel_brand_name"),
-                                             rsBook.getString("hotel_name"), rsBook.getInt("room_id"),
-                                             rsBook.getDate("check_in_date"), rsBook.getString("room_type"),
-                                             rsBook.getInt("total_number_occupants"));
-                bookedRooms.add(customerBook);
-            }
-        }
-
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return null;
+            Book customerBook = new Book(rsBook.getInt("customer_id"), rsBook.getString("hotel_brand_name"),
+                                         rsBook.getString("hotel_name"), rsBook.getInt("room_id"),
+                                         rsBook.getDate("check_in_date"), rsBook.getString("room_type"),
+                                         rsBook.getInt("total_number_occupants"));
+            bookedRooms.add(customerBook);
         }
 
         return bookedRooms;
     }
 
     /* Query specific row with CustomerId from 'Book' table */
-    public Book accessBook(int CustomerId, String hotelBrandName, String hotelName)
+    public Book accessBook(int CustomerId, String hotelBrandName, String hotelName) throws SQLException
     {
         Book customerBook = new Book();
 
-        try
+        String    query = "SELECT * FROM book WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
+                          + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
+        ResultSet rs    = stmt.executeQuery(query);
+
+        if (rs == null)
         {
-            String    query = "SELECT * FROM book WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
-                              + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
-            ResultSet rs    = stmt.executeQuery(query);
-
-            if (rs == null)
-            {
                 return null;
-            }
-            else
-            {
-                while (rs.next())
-                {
-                    customerBook = new Book(rs.getInt("customer_id"), rs.getString("hotel_brand_name"),
-                                            rs.getString("hotel_name"), rs.getInt("room_id"),
-                                            rs.getDate("check_in_date"), rs.getString("room_type"),
-                                            rs.getInt("total_number_occupants"));
-                }
-
-                if (customerBook.getCustomerId() == 0)
-                {
-                    customerBook = null;
-                }
-            }
         }
 
-        catch (SQLException e)
+        else
         {
-            System.out.println(e.getMessage());
+            while (rs.next())
+            {
+                customerBook = new Book(rs.getInt("customer_id"), rs.getString("hotel_brand_name"),
+                                        rs.getString("hotel_name"), rs.getInt("room_id"),
+                                        rs.getDate("check_in_date"), rs.getString("room_type"),
+                                        rs.getInt("total_number_occupants"));
+            }
+
+            if (customerBook.getCustomerId() == 0)
+            {
+                customerBook = null;
+            }
         }
 
         return customerBook;
     }
 
     /* Delete a specific row from 'Book' table */
-    public boolean deleteBook(int CustomerId, String hotelBrandName, String hotelName)
+    public boolean deleteBook(int CustomerId, String hotelBrandName, String hotelName) throws SQLException
     {
-        try
-        {
-            String delete = "DELETE FROM book WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
-                            + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
-            stmt.executeUpdate(delete);
-        }
 
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+        String delete = "DELETE FROM book WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
+                        + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
+        stmt.executeUpdate(delete);
 
         return true;
     }
 
     /* Query specific row with CustomerId from 'Rent' table */
-    public Rent accessRent(int CustomerId, String hotelBrandName, String hotelName)
+    public Rent accessRent(int CustomerId, String hotelBrandName, String hotelName) throws SQLException
     {
         Rent customerRent = new Rent();
-        try
-        {
-            String    query = "SELECT * FROM rent WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
-                              + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
-            ResultSet rs    = stmt.executeQuery(query);
 
-            while (rs.next())
-            {
-                customerRent = new Rent(rs.getInt("customer_id"), rs.getString("hotel_brand_name"),
-                                        rs.getString("hotel_name"), rs.getInt("room_id"),
-                                        rs.getInt("check_in_employee_id"), rs.getDate("check_in_date"),
-                                        rs.getString("room_type"), rs.getInt("total_number_occupants"),
-                                        rs.getBigDecimal("bill_amount"), (PGInterval) rs.getObject("duration"));
-            }
-        }
+        String    query = "SELECT * FROM rent WHERE customer_id= '" + CustomerId + "' AND hotel_brand_name = '"
+                          + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
+        ResultSet rs    = stmt.executeQuery(query);
 
-        catch (SQLException e)
+        while (rs.next())
         {
-            System.out.println(e.getMessage());
-            return null;
+            customerRent = new Rent(rs.getInt("customer_id"), rs.getString("hotel_brand_name"),
+                                    rs.getString("hotel_name"), rs.getInt("room_id"),
+                                    rs.getInt("check_in_employee_id"), rs.getDate("check_in_date"),
+                                    rs.getString("room_type"), rs.getInt("total_number_occupants"),
+                                    rs.getBigDecimal("bill_amount"), (PGInterval) rs.getObject("duration"));
         }
 
         return customerRent;
     }
 
     /* Insert data to 'Rent' table when the customer check-in with booking */
-    public boolean insertRentWithBooking(Book b, int day, int checkInEmployeeId)
+    public boolean insertRentWithBooking(Book b, int day, int checkInEmployeeId) throws SQLException
     {
-        try
-        {
-            //Get contents from 'Book' table
-            int    customerId           = b.getCustomerId();
-            String hotelBrandName       = b.getHotelBrandName();
-            String hotelName            = b.getHotelName();
-            int    roomId               = b.getRoomId();
-            Date   checkInDate          = b.getCheckInDate();
-            String roomType             = b.getRoomType();
-            int    totalNumberOccupants = b.getTotalNumberOccupants();
 
-            //Get room price from 'Room' table
-            String roomQuery = "SELECT price FROM room WHERE hotel_brand_name = '"
-                               + hotelBrandName + "'" + " AND hotel_name = '"
-                               + hotelName + "'" + " AND room_id = '" + roomId + "'";
-            ResultSet rs = stmt.executeQuery(roomQuery);
-            rs.next();
-            BigDecimal price = rs.getBigDecimal("price");
+        //Get contents from 'Book' table
+        int    customerId           = b.getCustomerId();
+        String hotelBrandName       = b.getHotelBrandName();
+        String hotelName            = b.getHotelName();
+        int    roomId               = b.getRoomId();
+        Date   checkInDate          = b.getCheckInDate();
+        String roomType             = b.getRoomType();
+        int    totalNumberOccupants = b.getTotalNumberOccupants();
 
-            PGInterval duration = new PGInterval();
-            duration.setDays(day);
+        //Get room price from 'Room' table
+        String    roomQuery = "SELECT price FROM room WHERE hotel_brand_name = '"
+                              + hotelBrandName + "'" + " AND hotel_name = '"
+                              + hotelName + "'" + " AND room_id = '" + roomId + "'";
+        ResultSet rs        = stmt.executeQuery(roomQuery);
 
-            //Calculate total payment
-            BigDecimal days       = new BigDecimal(day);
-            BigDecimal billAmount = price.multiply(days);
+        rs.next();
+        BigDecimal price    = rs.getBigDecimal("price");
 
-            //Insert row to 'Rent' table
-            String insert = "INSERT INTO rent(customer_id, hotel_brand_name, "
-                            + "hotel_name, room_id, check_in_employee_id, "
-                            + "check_in_date, room_type, total_number_occupants, "
-                            + "bill_amount, duration)" + "VALUES(" + customerId + ", '"
-                            + hotelBrandName + "', '" + hotelName + "', " + roomId
-                            + ", " + checkInEmployeeId + ", '" + checkInDate
-                            + "', '" + roomType + "', " + totalNumberOccupants + ", "
-                            + billAmount + ", '" + duration + "')";
+        PGInterval duration = new PGInterval();
+        duration.setDays(day);
 
-            stmt.executeUpdate(insert);
-        }
+        //Calculate total payment
+        BigDecimal days       = new BigDecimal(day);
+        BigDecimal billAmount = price.multiply(days);
 
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+        //Insert row to 'Rent' table
+        String insert = "INSERT INTO rent(customer_id, hotel_brand_name, "
+                        + "hotel_name, room_id, check_in_employee_id, "
+                        + "check_in_date, room_type, total_number_occupants, "
+                        + "bill_amount, duration)" + "VALUES(" + customerId + ", '"
+                        + hotelBrandName + "', '" + hotelName + "', " + roomId
+                        + ", " + checkInEmployeeId + ", '" + checkInDate
+                        + "', '" + roomType + "', " + totalNumberOccupants + ", "
+                        + billAmount + ", '" + duration + "')";
+
+        stmt.executeUpdate(insert);
 
         return true;
     }
 
     /* Insert data to 'Rent' table when the customer check-in without booking */
     public boolean checkInWithoutBooking(int customerId, int roomId, int checkInEmployeeId, Date checkInDate,
-                                         String roomType, int totalNumberOccupants, int day)
+                                         String roomType, int totalNumberOccupants, int day) throws SQLException
     {
-        try
-        {
-            // Get hotal_brand_name and hotel_name depends on check_in_employee_id
-            Employment employment     = accessEmployment(checkInEmployeeId);
-            String     hotelBrandName = employment.getHotelBrandName();
-            String     hotelName      = employment.getHotelName();
 
-            // Get price and room_capacity depends on hotel_brand_name, hotel_name and room_id
-            String queryRoom = "SELECT price, room_capacity FROM room WHERE hotel_brand_name = '"
-                               + hotelBrandName + "' AND hotel_name = '" + hotelName
-                               + "' AND room_id = " + roomId;
-            ResultSet rsRoom = stmt.executeQuery(queryRoom);
+        // Get hotal_brand_name and hotel_name depends on check_in_employee_id
+        Employment employment     = accessEmployment(checkInEmployeeId);
+        String     hotelBrandName = employment.getHotelBrandName();
+        String     hotelName      = employment.getHotelName();
 
-            BigDecimal price;
+        // Get price and room_capacity depends on hotel_brand_name, hotel_name and room_id
+        String queryRoom = "SELECT price, room_capacity FROM room WHERE hotel_brand_name = '"
+                           + hotelBrandName + "' AND hotel_name = '" + hotelName
+                           + "' AND room_id = " + roomId;
+        ResultSet rsRoom = stmt.executeQuery(queryRoom);
 
-            rsRoom.next();
-            price = rsRoom.getBigDecimal("price");
+        BigDecimal price;
 
-            PGInterval duration = new PGInterval();
-            duration.setDays(day);
+        rsRoom.next();
+        price = rsRoom.getBigDecimal("price");
 
-            //Calculate total payment
-            BigDecimal days       = new BigDecimal(day);
-            BigDecimal billAmount = price.multiply(days);
+        PGInterval duration = new PGInterval();
+        duration.setDays(day);
 
-            //Insert row to 'Rent' table
-            String insert = "INSERT INTO rent(customer_id, hotel_brand_name, "
-                            + "hotel_name, room_id, check_in_employee_id, "
-                            + "check_in_date, room_type, total_number_occupants, "
-                            + "bill_amount, duration)" + "VALUES(" + customerId + ", '"
-                            + hotelBrandName + "', '" + hotelName + "', " + roomId
-                            + ", " + checkInEmployeeId + ", '" + checkInDate
-                            + "', '" + roomType + "', " + totalNumberOccupants + ", "
-                            + billAmount + ", '" + duration + "')";
+        //Calculate total payment
+        BigDecimal days       = new BigDecimal(day);
+        BigDecimal billAmount = price.multiply(days);
 
-            stmt.executeUpdate(insert);
-        }
+        //Insert row to 'Rent' table
+        String insert = "INSERT INTO rent(customer_id, hotel_brand_name, "
+                        + "hotel_name, room_id, check_in_employee_id, "
+                        + "check_in_date, room_type, total_number_occupants, "
+                        + "bill_amount, duration)" + "VALUES(" + customerId + ", '"
+                        + hotelBrandName + "', '" + hotelName + "', " + roomId
+                        + ", " + checkInEmployeeId + ", '" + checkInDate
+                        + "', '" + roomType + "', " + totalNumberOccupants + ", "
+                        + billAmount + ", '" + duration + "')";
 
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+        stmt.executeUpdate(insert);
 
         return true;
     }
 
     /* Delete a row with a specific CustomerId from 'Rent' table */
-    public boolean deleteRent(int customerId, String hotelBrandName, String hotelName)
+    public boolean deleteRent(int customerId, String hotelBrandName, String hotelName) throws SQLException
     {
-        try
-        {
-            String delete = "DELETE FROM rent WHERE customer_id= '" + customerId + "' AND hotel_brand_name = '"
-                    + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
-            stmt.executeUpdate(delete);
-        }
 
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+        String delete = "DELETE FROM rent WHERE customer_id= '" + customerId + "' AND hotel_brand_name = '"
+                        + hotelBrandName + "' AND hotel_name = '" + hotelName + "'";
+        stmt.executeUpdate(delete);
 
         return true;
     }
 
     /* Insert data to 'Rent_History' table when the customer check-out */
-    public boolean insertRentHistory(Rent r, int checkOutEmployeeId)
+    public boolean insertRentHistory(Rent r, int checkOutEmployeeId) throws SQLException
     {
-        try
-        {
-            //Get contents from 'Rent' table
-            int        customerId           = r.getCustomerId();
-            String     hotelBrandName       = r.getHotelBrandName();
-            String     hotelName            = r.getHotelName();
-            int        roomId               = r.getRoomId();
-            int        checkInEmployeeId    = r.getCheckInEmployeeId();
-            Date       checkInDate          = r.getCheckInDate();
-            String     roomType             = r.getRoomType();
-            int        totalNumberOccupants = r.getTotalNumberOccupants();
-            BigDecimal billAmount           = r.getBillAmount();
-            PGInterval duration             = r.getDuration();
+        //Get contents from 'Rent' table
+        int        customerId           = r.getCustomerId();
+        String     hotelBrandName       = r.getHotelBrandName();
+        String     hotelName            = r.getHotelName();
+        int        roomId               = r.getRoomId();
+        int        checkInEmployeeId    = r.getCheckInEmployeeId();
+        Date       checkInDate          = r.getCheckInDate();
+        String     roomType             = r.getRoomType();
+        int        totalNumberOccupants = r.getTotalNumberOccupants();
+        BigDecimal billAmount           = r.getBillAmount();
+        PGInterval duration             = r.getDuration();
 
-            //Calculate check out date
-            int  days         = duration.getDays();
-            Date checkOutDate = this.addDays(checkInDate, days);
+        //Calculate check out date
+        int  days         = duration.getDays();
+        Date checkOutDate = this.addDays(checkInDate, days);
 
-            //Insert row to 'Rent_History' table
-            String insert = "INSERT INTO rent_history(customer_id, hotel_brand_name, "
-                            + "hotel_name, room_id, check_in_employee_id, "
-                            + "check_in_date, room_type, total_number_occupants, "
-                            + "bill_amount, duration, check_out_employee_id, "
-                            + "check_out_date)" + "VALUES(" + customerId + ", '"
-                            + hotelBrandName + "', '" + hotelName + "', "
-                            + roomId + ", " + checkInEmployeeId + ", '" + checkInDate
-                            + "', '" + roomType + "', " + totalNumberOccupants + ", "
-                            + billAmount + ", '" + duration + "'," + checkOutEmployeeId
-                            + ", '" + checkOutDate + "')";
+        //Insert row to 'Rent_History' table
+        String insert = "INSERT INTO rent_history(customer_id, hotel_brand_name, "
+                        + "hotel_name, room_id, check_in_employee_id, "
+                        + "check_in_date, room_type, total_number_occupants, "
+                        + "bill_amount, duration, check_out_employee_id, "
+                        + "check_out_date)" + "VALUES(" + customerId + ", '"
+                        + hotelBrandName + "', '" + hotelName + "', "
+                        + roomId + ", " + checkInEmployeeId + ", '" + checkInDate
+                        + "', '" + roomType + "', " + totalNumberOccupants + ", "
+                        + billAmount + ", '" + duration + "'," + checkOutEmployeeId
+                        + ", '" + checkOutDate + "')";
 
-            stmt.executeUpdate(insert);
-        }
-
-        catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+        stmt.executeUpdate(insert);
 
         return true;
     }
@@ -709,7 +611,8 @@ public class Main
     }
 
     /* Check-in Operation: Transform 'Book' info to 'Rent' table */
-    public boolean checkInWithBooking(int customerId, String hotelBrandName, String hotelName, Book b, int day, int checkInEmployeeId)
+    public boolean checkInWithBooking(int customerId, String hotelBrandName, String hotelName, Book b, int day,
+                                      int checkInEmployeeId) throws SQLException
     {
         boolean deleteB = deleteBook(customerId, hotelBrandName, hotelName);
         boolean insertR = insertRentWithBooking(b, day, checkInEmployeeId);
@@ -718,7 +621,7 @@ public class Main
     }
 
     /* Check-out Operation: Transform 'Rent' info to 'Rent_History' table */
-    public boolean checkOut(int customerId, String hotelBrandName, String hotelName, Rent r, int checkOutEmployeeId)
+    public boolean checkOut(int customerId, String hotelBrandName, String hotelName, Rent r, int checkOutEmployeeId) throws SQLException
     {
         boolean deleteR  = deleteRent(customerId, hotelBrandName, hotelName);
         boolean insertRH = insertRentHistory(r, checkOutEmployeeId);
