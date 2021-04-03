@@ -2671,3 +2671,13 @@ INSERT INTO rent (customer_id, hotel_brand_name, hotel_name, room_id, check_in_e
 
 
 -------------------------------------------------Rent_history-------------------------------------------------------
+INSERT INTO rent_history(customer_id, hotel_brand_name, hotel_name, room_id, check_in_employee_id, check_in_date, room_type, total_number_occupants, bill_amount, duration, check_out_employee_id, check_out_date)
+	VALUES(100029, 'Galaxy', 'Jupiter', 102, 335606, '2020-12-24', 'Non-smoking', 2, 310.00, interval'2 day', 335606, '2020-12-26');
+INSERT INTO rent_history(customer_id, hotel_brand_name, hotel_name, room_id, check_in_employee_id, check_in_date, room_type, total_number_occupants, bill_amount, duration, check_out_employee_id, check_out_date)
+	VALUES(100028, 'Geometric', 'Circle', 101, 335617, '2021-01-04', 'Non-smoking', 1, 294.00, interval'3 day', 335617, '2021-01-07');
+INSERT INTO rent_history(customer_id, hotel_brand_name, hotel_name, room_id, check_in_employee_id, check_in_date, room_type, total_number_occupants, bill_amount, duration, check_out_employee_id, check_out_date)
+	VALUES(100027, 'Hilton', 'CONRAD', 101, 335587, '2021-02-02', 'Non-smoking', 2, 235.00, interval'1 day', 335587, '2021-02-03');
+INSERT INTO rent_history(customer_id, hotel_brand_name, hotel_name, room_id, check_in_employee_id, check_in_date, room_type, total_number_occupants, bill_amount, duration, check_out_employee_id, check_out_date)
+	VALUES(100026, 'Hyatt', 'Park Hyatt', 101, 335634, '2021-02-04', 'Non-smoking', 2, 404.00, interval'2 day', 335634, '2021-02-06');
+INSERT INTO rent_history(customer_id, hotel_brand_name, hotel_name, room_id, check_in_employee_id, check_in_date, room_type, total_number_occupants, bill_amount, duration, check_out_employee_id, check_out_date)
+	VALUES(100025, 'Galaxy', 'Jupiter', 103, 335606, '2020-2-24', 'Non-smoking', 2, 165.00, interval'1 day', 335606, '2021-02-05');

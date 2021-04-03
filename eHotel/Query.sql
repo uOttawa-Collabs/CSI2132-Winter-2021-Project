@@ -15,7 +15,12 @@ ORDER BY ro.price, rt.check_in_date DESC;
 
 -- 2. Create a view named CustomerListView that gives the details of all the customers. 
 --    Please, sort the customers by hotel chain.
-
+CREATE VIEW CustomerListView AS
+								SELECT *
+								FROM customer c
+								ORDER BY c.id;
+								
+SELECT * FROM CustomerListView;
 
 
 -- 3. Display the details of the cheapest hotel room of all hotel chains.
@@ -57,7 +62,14 @@ SELECT id, phone_number
 FROM customer
 WHERE id = 100005;
 
+
 -- 7. Which category hotels (1 star to 5 star) are most preferred by the customers?
+SELECT h.star_category, COUNT(h.star_category) count_category
+FROM rent_history rh
+JOIN hotel h
+ON rh.hotel_brand_name = h.hotel_brand_name AND rh.hotel_name = h.hotel_name
+GROUP BY h.star_category
+ORDER BY count_category DESC;
 
 
 -- 8. Find the second highest salary from the employee table.
